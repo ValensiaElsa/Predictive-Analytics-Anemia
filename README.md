@@ -89,7 +89,7 @@ Data Preparation mencakup data cleaning dan data preprocessing yang penting untu
 ### Data Cleaning
 - **Penanganan Missing Value**
 
-Langkah pertama adalah memeriksa apakah ada data yang hilang (missing values) pada setiap fitur. Jika ada nilai yang hilang pada fitur penting, imputasi dilakukan menggunakan median atau mean (untuk fitur numerik). Jika jumlahnya sangat sedikit, baris yang memiliki missing values dapat dihapus tanpa mempengaruhi kualitas dataset. Penanganan missing values diperlukan karena data yang hilang dapat mengurangi kualitas model dan menyebabkan bias dalam prediksi. Dengan imputasi atau penghapusan missing values, dataset menjadi lebih konsisten dan memungkinkan model untuk belajar dengan lebih baik.
+  Langkah pertama adalah memeriksa apakah ada data yang hilang (missing values) pada setiap fitur. Jika ada nilai yang hilang pada fitur penting, imputasi dilakukan menggunakan median atau mean (untuk fitur numerik). Jika jumlahnya sangat sedikit, baris yang memiliki missing values dapat dihapus tanpa mempengaruhi kualitas dataset. Penanganan missing values diperlukan karena data yang hilang dapat mengurangi kualitas model dan menyebabkan bias dalam prediksi. Dengan imputasi atau penghapusan missing values, dataset menjadi lebih konsisten dan memungkinkan model untuk belajar dengan lebih baik.
     
 Untuk pengecekan missing values, kode berikut digunakan:
 ```python
@@ -100,39 +100,39 @@ df.isnull().sum()
 Namun, dalam dataset ini, saat dilakukan pengecekan tidak terdapat missing value sehingga tidak diperlukan penanganan missing value.
 - **Penghapusan Data Duplikat**
 
-Langkah selanjutnya adalah memeriksa apakah ada data duplikat di dalam dataset. Data duplikat dapat terjadi akibat kesalahan saat pengumpulan atau proses input data. Baris-baris yang memiliki nilai identik di seluruh fitur akan diperiksa dan dihapus jika ditemukan. Data duplikat harus dihapus karena dapat menyebabkan model memberikan bobot berlebih pada informasi yang sama, yang dapat mengarah pada overfitting atau kesalahan dalam pelatihan model. Penghapusan data duplikat memastikan bahwa model hanya belajar dari data yang unik dan relevan. 
+  Langkah selanjutnya adalah memeriksa apakah ada data duplikat di dalam dataset. Data duplikat dapat terjadi akibat kesalahan saat pengumpulan atau proses input data. Baris-baris yang memiliki nilai identik di seluruh fitur akan diperiksa dan dihapus jika ditemukan. Data duplikat harus dihapus karena dapat menyebabkan model memberikan bobot berlebih pada informasi yang sama, yang dapat mengarah pada overfitting atau kesalahan dalam pelatihan model. Penghapusan data duplikat memastikan bahwa model hanya belajar dari data yang unik dan relevan. 
 
-Untuk pengecekan dan penghapusan data duplikat, kode berikut digunakan:
-```python
-# Memeriksa duplikasi data
-jumlah_duplikat = df.duplicated().sum()
-print(f"Jumlah baris duplikat: {jumlah_duplikat}")
+  Untuk pengecekan dan penghapusan data duplikat, kode berikut digunakan:
+  ```python
+  # Memeriksa duplikasi data
+  jumlah_duplikat = df.duplicated().sum()
+    print(f"Jumlah baris duplikat: {jumlah_duplikat}")
 
-# Menghapus baris duplikat
-df = df.drop_duplicates()
-```
+  # Menghapus baris duplikat
+  df = df.drop_duplicates()
+  ```
 
-**gambar**
-Pada dataset ini, ditemukan 887 baris duplikat yang kemudian dihapus.
+  **gambar**
+  Pada dataset ini, ditemukan 887 baris duplikat yang kemudian dihapus.
 - **Penanganan Outlier**
 
-Untuk mendeteksi outlier atau nilai ekstrem, teknik boxplot dan IQR digunakan untuk mengidentifikasi data yang berada di luar batas normal distribusi. Penananganan outlier diperlukan karena outlier yang tidak sesuai dengan pola data dapat mengganggu model, menghasilkan prediksi yang tidak akurat, dan menyebabkan overfitting. 
+  Untuk mendeteksi outlier atau nilai ekstrem, teknik boxplot dan IQR digunakan untuk mengidentifikasi data yang berada di luar batas normal distribusi. Penananganan outlier diperlukan karena outlier yang tidak sesuai dengan pola data dapat mengganggu model, menghasilkan prediksi yang tidak akurat, dan menyebabkan overfitting. 
 
-**gambar**
-Pada dataset ini tidak ditemukan outlier.
+  **gambar**
+  Pada dataset ini tidak ditemukan outlier.
 
 ### Data Preprocessing
 Fitur pada Dataset Anemia sudah berbentuk numerik semua sehingga tidak perlu dilakukan Encoding. Preprocessing yang dilakukan adalah sebagai berikut:
 - **Data Splitting**
 
-Dataset akan dibagi menjadi dua bagian, yaitu data training dan testing (proporsi 80:20). Data training akan digunakan untuk melatih model, sedangkan data testing akan digunakan untuk mengevaluasi kinerja model yang sudah dibangun. Pemisahan data ini penting untuk menghindari overfitting dan memastikan model dapat diuji pada data yang tidak digunakan selama proses pelatihan.
+  Dataset akan dibagi menjadi dua bagian, yaitu data training dan testing (proporsi 80:20). Data training akan digunakan untuk melatih model, sedangkan data testing akan digunakan untuk mengevaluasi kinerja model yang sudah dibangun. Pemisahan data ini penting untuk menghindari overfitting dan memastikan model dapat diuji pada data yang tidak digunakan selama proses pelatihan.
 - **Penanganan Imbalanced Classes**
 
-Mengingat adanya ketidakseimbangan kelas pada variabel target Result (lebih banyak individu yang tidak menderita anemia), teknik seperti SMOTE (Synthetic Minority Over-sampling Technique) atau undersampling bisa diterapkan untuk memastikan bahwa model tidak terlalu bias terhadap kelas mayoritas (Not Anemic). Dalam hal ini, SMOTE bisa digunakan untuk menghasilkan lebih banyak sampel dari kelas Anemic.Ketidakseimbangan kelas dapat membuat model lebih cenderung memprediksi kelas mayoritas, mengabaikan kelas minoritas. Oleh karena itu, penanganan ketidakseimbangan kelas ini penting untuk menghasilkan model yang lebih akurat dan adil.
+  Mengingat adanya ketidakseimbangan kelas pada variabel target Result (lebih banyak individu yang tidak menderita anemia), teknik seperti SMOTE (Synthetic Minority Over-sampling Technique) atau undersampling bisa diterapkan untuk memastikan bahwa model tidak terlalu bias terhadap kelas mayoritas (Not Anemic). Dalam hal ini, SMOTE bisa digunakan untuk menghasilkan lebih banyak sampel dari kelas Anemic.Ketidakseimbangan kelas dapat membuat model lebih cenderung memprediksi kelas mayoritas, mengabaikan kelas minoritas. Oleh karena itu, penanganan ketidakseimbangan kelas ini penting untuk menghasilkan model yang lebih akurat dan adil.
     **gambar**
 - **Feature Scaling**
     
-Proses scaling bertujuan untuk menyamakan rentang nilai pada setiap fitur dalam dataset, sehingga semua fitur berada pada skala yang serupa. Jika model machine learning tidak melakukan scaling, fitur dengan nilai yang lebih besar cenderung mendominasi hasil prediksi, sementara fitur dengan nilai yang lebih kecil memiliki dampak yang lebih rendah terhadap prediksi. Dalam proyek ini, fitur akan di-scale menggunakan metode standarisasi karena distribusi data cenderung mendekati normal, sehingga metode ini lebih sesuai digunakan. Standarisasi dilakukan dengan memanfaatkan fungsi StandardScaler() dari library sklearn, yang bekerja dengan mengurangi setiap nilai pada fitur dengan rata-rata fitur (mean), kemudian membagi hasilnya dengan standar deviasi. Hal ini memastikan bahwa semua fitur terpusat di sekitar nol dan memiliki variansi yang seragam.
+  Proses scaling bertujuan untuk menyamakan rentang nilai pada setiap fitur dalam dataset, sehingga semua fitur berada pada skala yang serupa. Jika model machine learning tidak melakukan scaling, fitur dengan nilai yang lebih besar cenderung mendominasi hasil prediksi, sementara fitur dengan nilai yang lebih kecil memiliki dampak yang lebih rendah terhadap prediksi. Dalam proyek ini, fitur akan di-scale menggunakan metode standarisasi karena distribusi data cenderung mendekati normal, sehingga metode ini lebih sesuai digunakan. Standarisasi dilakukan dengan memanfaatkan fungsi StandardScaler() dari library sklearn, yang bekerja dengan mengurangi setiap nilai pada fitur dengan rata-rata fitur (mean), kemudian membagi hasilnya dengan standar deviasi. Hal ini memastikan bahwa semua fitur terpusat di sekitar nol dan memiliki variansi yang seragam.
 
 ## Modeling
 
@@ -142,26 +142,26 @@ Pada tahap ini, beberapa algoritma machine learning digunakan untuk memecahkan m
 
 **Random Forest** adalah algoritma ensemble yang menggunakan banyak pohon keputusan untuk membuat prediksi. Setiap pohon dalam hutan dilatih menggunakan subset data yang berbeda, dan hasilnya digabungkan untuk meningkatkan akurasi model secara keseluruhan.
 
-#### Tahapan (Proses)
+**Tahapan:**
 
 - Pembagian data secara acak menjadi beberapa subset.
 - Membangun beberapa pohon keputusan pada subset data yang berbeda.
 - Menggunakan mayoritas suara untuk menghasilkan prediksi akhir.
 
-#### Parameter yang Digunakan
+**Parameter yang Digunakan:**
 
 - `n_estimators`: Jumlah pohon dalam hutan.
 - `max_depth`: Kedalaman maksimum pohon.
 - `min_samples_split`: Jumlah minimum sampel yang diperlukan untuk membagi internal pohon.
 - `min_samples_leaf`: Jumlah minimum sampel yang diperlukan di setiap daun pohon.
 
-#### Kelebihan
+**Kelebihan:**
 
 - Mengurangi risiko **overfitting** dibandingkan pohon keputusan tunggal.
 - Cocok untuk dataset besar dan dapat menangani data yang tidak linier.
 - Memberikan nilai **feature importance** yang berguna untuk analisis lebih lanjut.
 
-#### Kekurangan
+**Kekurangan:**
 
 - Proses pelatihan lebih lama jika jumlah pohon sangat besar.
 - Kurang interpretatif dibandingkan dengan model pohon keputusan tunggal.
@@ -170,25 +170,25 @@ Pada tahap ini, beberapa algoritma machine learning digunakan untuk memecahkan m
 
 **Decision Tree** adalah algoritma yang membangun model dalam bentuk pohon keputusan untuk klasifikasi dan regresi. Setiap simpul pada pohon mewakili fitur, dan cabang mewakili keputusan berdasarkan nilai fitur tersebut.
 
-#### Tahapan (Proses)
+**Tahapan:**
 
 - Memilih fitur yang membagi dataset terbaik.
 - Membangun pohon keputusan berdasarkan pembagian terbaik hingga batas kedalaman pohon tercapai.
 
-#### Parameter yang Digunakan
+**Parameter yang Digunakan:**
 
 - `max_depth`: Kedalaman maksimum pohon.
 - `min_samples_split`: Jumlah minimum sampel yang diperlukan untuk membagi cabang pohon.
 - `min_samples_leaf`: Jumlah minimum sampel yang diperlukan pada daun pohon.
 - `criterion`: Fungsi untuk mengukur kualitas pembagian (misalnya, "gini" atau "entropy").
 
-#### Kelebihan
+**Kelebihan:**
 
 - Mudah dipahami dan diinterpretasikan.
 - Cepat dalam proses pelatihan dan prediksi.
 - Dapat menangani fitur numerik dan kategorikal.
 
-#### Kekurangan
+**Kekurangan:**
 
 - Rentan terhadap **overfitting**, terutama jika pohon terlalu dalam.
 - Kurang stabil pada data yang noise.
@@ -197,24 +197,24 @@ Pada tahap ini, beberapa algoritma machine learning digunakan untuk memecahkan m
 
 **Logistic Regression** adalah model linier yang digunakan untuk klasifikasi biner. Model ini memodelkan probabilitas dari kelas target menggunakan fungsi logistik.
 
-#### Tahapan (Proses)
+**Tahapan:**
 
 - Menghitung kombinasi linier dari fitur-fitur.
 - Menerapkan fungsi logistik untuk menghasilkan probabilitas antara 0 dan 1, kemudian mengklasifikasikan data berdasarkan threshold yang ditentukan.
 
-#### Parameter yang Digunakan
+**Parameter yang Digunakan:**
 
 - `penalty`: Jenis regulasi yang digunakan untuk menghindari overfitting (L1, L2).
 - `C`: Parameter untuk kontrol regulasi.
 - `solver`: Algoritma untuk optimasi (misalnya, "liblinear" atau "saga").
 
-#### Kelebihan
+**Kelebihan:**
 
 - Efisien untuk dataset besar dengan fitur linier.
 - Memberikan probabilitas hasil, yang bisa digunakan untuk analisis lebih lanjut.
 - Cepat dalam pelatihan dan prediksi.
 
-#### Kekurangan
+**Kekurangan:**
 
 - Tidak cocok untuk data dengan hubungan non-linier yang kompleks.
 - Kinerja dapat menurun jika fitur tidak terstandarisasi dengan baik.
@@ -223,24 +223,24 @@ Pada tahap ini, beberapa algoritma machine learning digunakan untuk memecahkan m
 
 **K-Nearest Neighbors (KNN)** adalah algoritma non-parametrik yang mengklasifikasikan data berdasarkan mayoritas kelas dari **k** tetangga terdekatnya. Metrik jarak, seperti **Euclidean**, digunakan untuk menemukan tetangga terdekat.
 
-#### Tahapan (Proses)
+**Tahapan:**
 
 - Menghitung jarak antara titik data yang ingin diprediksi dengan semua titik data dalam training set.
 - Mengklasifikasikan data berdasarkan mayoritas kelas dari **k** tetangga terdekat.
-
-#### Parameter yang Digunakan
+- 
+**Parameter yang Digunakan:**
 
 - `n_neighbors`: Jumlah tetangga terdekat yang digunakan untuk klasifikasi.
 - `metric`: Metrik jarak yang digunakan untuk menghitung kedekatan (misalnya, "euclidean").
 - `weights`: Metode pembobotan tetangga (uniform atau distance).
 
-#### Kelebihan
+**Kelebihan:**
 
 - Sederhana dan mudah dipahami.
 - Tidak memerlukan model eksplisit; hanya memerlukan data untuk melakukan prediksi.
 - Sangat baik untuk masalah dengan data tidak terstruktur.
 
-#### Kekurangan
+**Kekurangan:**
 
 - Proses prediksi sangat lambat pada dataset besar, karena harus menghitung jarak ke semua titik data.
 - Rentan terhadap data yang berisik (noisy data) dan tidak efektif pada data dengan dimensi tinggi.
@@ -254,14 +254,17 @@ Contoh kode tuning untuk **Random Forest**:
 
 ```python
 from sklearn.model_selection import GridSearchCV
-param_grid = {
-    'n_estimators': [100, 200],
-    'max_depth': [10, 20, None],
-    'min_samples_split': [2, 5]
+param_grid_rf = {
+    'n_estimators': [50, 100, 200],
+    'max_depth': [5, 10, 20],
+    'min_samples_split': [2, 5, 10]
 }
-grid_search = GridSearchCV(RandomForestClassifier(), param_grid, cv=5, n_jobs=-1)
-grid_search.fit(X_train, y_train)
-best_rf = grid_search.best_estimator_
+
+grid_rf = GridSearchCV(RandomForestClassifier(), param_grid_rf, cv=5)
+grid_rf.fit(X_train_scaled, y_train_resampled)
+
+print("Best Params for Random Forest:", grid_rf.best_params_)
+best_rf = grid_rf.best_estimator_
 ```
 
 ### Pemilihan Model Terbaik
@@ -274,7 +277,7 @@ Pada tahap ini, metrik evaluasi yang digunakan untuk mengukur performa model mel
 
 #### 1. **Akurasi**
 
-* **Penjelasan**: Akurasi adalah metrik yang mengukur seberapa banyak prediksi yang benar dibandingkan dengan total prediksi yang dilakukan. Dalam kasus klasifikasi biner, akurasi dihitung dengan rumus:
+- **Penjelasan**: Akurasi adalah metrik yang mengukur seberapa banyak prediksi yang benar dibandingkan dengan total prediksi yang dilakukan. Dalam kasus klasifikasi biner, akurasi dihitung dengan rumus:
 
   $$
   \text{Akurasi} = \frac{\text{True Positives} + \text{True Negatives}}{\text{Total Observations}}
@@ -282,11 +285,11 @@ Pada tahap ini, metrik evaluasi yang digunakan untuk mengukur performa model mel
 
   Di mana **True Positives (TP)** adalah jumlah individu yang benar-benar menderita anemia dan diprediksi menderita anemia, sedangkan **True Negatives (TN)** adalah jumlah individu yang tidak menderita anemia dan diprediksi tidak menderita anemia.
 
-* **Hasil Proyek**: Akurasi yang tinggi menunjukkan bahwa model berhasil memprediksi dengan benar sebagian besar data, namun dalam kasus ketidakseimbangan kelas (di mana jumlah **Not Anemic** jauh lebih besar), akurasi bisa memberikan gambaran yang menyesatkan. Oleh karena itu, penting untuk melihat metrik lain seperti precision dan recall.
+- **Hasil Proyek**: Akurasi yang tinggi menunjukkan bahwa model berhasil memprediksi dengan benar sebagian besar data, namun dalam kasus ketidakseimbangan kelas (di mana jumlah **Not Anemic** jauh lebih besar), akurasi bisa memberikan gambaran yang menyesatkan. Oleh karena itu, penting untuk melihat metrik lain seperti precision dan recall.
 
 #### 2. **Precision**
 
-* **Penjelasan**: Precision mengukur seberapa banyak prediksi positif yang benar (yaitu, individu yang diprediksi menderita anemia dan benar-benar menderita anemia) dibandingkan dengan seluruh prediksi positif yang dibuat oleh model. Formula precision adalah:
+- **Penjelasan**: Precision mengukur seberapa banyak prediksi positif yang benar (yaitu, individu yang diprediksi menderita anemia dan benar-benar menderita anemia) dibandingkan dengan seluruh prediksi positif yang dibuat oleh model. Formula precision adalah:
 
   $$
   \text{Precision} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Positives}}
@@ -294,11 +297,11 @@ Pada tahap ini, metrik evaluasi yang digunakan untuk mengukur performa model mel
 
   Precision tinggi menunjukkan bahwa model sangat berhati-hati dalam mengklasifikasikan individu sebagai menderita anemia dan memiliki lebih sedikit kesalahan klasifikasi (false positives).
 
-* **Hasil Proyek**: Precision yang tinggi berarti model dapat mengidentifikasi individu yang benar-benar menderita anemia dengan baik, menghindari prediksi yang salah terhadap individu yang sehat. Ini sangat penting ketika tujuan adalah meminimalkan **false positives**, misalnya, untuk menghindari pemberian diagnosis yang salah.
+- **Hasil Proyek**: Precision yang tinggi berarti model dapat mengidentifikasi individu yang benar-benar menderita anemia dengan baik, menghindari prediksi yang salah terhadap individu yang sehat. Ini sangat penting ketika tujuan adalah meminimalkan **false positives**, misalnya, untuk menghindari pemberian diagnosis yang salah.
 
 #### 3. **Recall**
 
-* **Penjelasan**: Recall mengukur kemampuan model dalam menemukan semua kasus positif yang sebenarnya (yaitu, mendeteksi semua individu yang benar-benar menderita anemia). Formula recall adalah:
+- **Penjelasan**: Recall mengukur kemampuan model dalam menemukan semua kasus positif yang sebenarnya (yaitu, mendeteksi semua individu yang benar-benar menderita anemia). Formula recall adalah:
 
   $$
   \text{Recall} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Negatives}}
@@ -306,11 +309,11 @@ Pada tahap ini, metrik evaluasi yang digunakan untuk mengukur performa model mel
 
   Recall tinggi menunjukkan bahwa model berhasil menangkap sebagian besar individu yang benar-benar menderita anemia, meskipun mungkin ada beberapa kesalahan (false negatives).
 
-* **Hasil Proyek**: Recall yang tinggi sangat diinginkan dalam kasus diagnosis medis, karena lebih penting untuk **menangkap semua pasien yang menderita anemia** (mencegah **false negatives**) daripada menghindari beberapa **false positives**.
+- **Hasil Proyek**: Recall yang tinggi sangat diinginkan dalam kasus diagnosis medis, karena lebih penting untuk **menangkap semua pasien yang menderita anemia** (mencegah **false negatives**) daripada menghindari beberapa **false positives**.
 
 #### 4. **F1-Score**
 
-* **Penjelasan**: F1-Score adalah rata-rata harmonis antara **Precision** dan **Recall**. F1-Score memberikan keseimbangan antara precision dan recall, yang berguna ketika kita menginginkan performa yang baik dalam kedua aspek tersebut. Formula F1-Score adalah:
+- **Penjelasan**: F1-Score adalah rata-rata harmonis antara **Precision** dan **Recall**. F1-Score memberikan keseimbangan antara precision dan recall, yang berguna ketika kita menginginkan performa yang baik dalam kedua aspek tersebut. Formula F1-Score adalah:
 
   $$
   \text{F1-Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
@@ -318,13 +321,13 @@ Pada tahap ini, metrik evaluasi yang digunakan untuk mengukur performa model mel
 
   F1-Score yang tinggi menunjukkan bahwa model memberikan keseimbangan yang baik antara ketepatan prediksi dan kemampuan untuk mendeteksi semua kasus positif.
 
-* **Hasil Proyek**: F1-Score yang baik menunjukkan bahwa model tidak hanya akurat dalam memprediksi anemia tetapi juga berhasil mendeteksi sebagian besar individu yang benar-benar menderita anemia, yang sangat penting dalam konteks kesehatan.
+- **Hasil Proyek**: F1-Score yang baik menunjukkan bahwa model tidak hanya akurat dalam memprediksi anemia tetapi juga berhasil mendeteksi sebagian besar individu yang benar-benar menderita anemia, yang sangat penting dalam konteks kesehatan.
 
 ### Hasil Proyek Berdasarkan Metrik Evaluasi
 
 Setelah melakukan pelatihan dan evaluasi model menggunakan **cross-validation**, hasil yang didapatkan menunjukkan performa model yang beragam tergantung pada algoritma yang digunakan. Berikut adalah ringkasan metrik evaluasi untuk model yang diuji:
 
-* **Random Forest (RF)**:
+- **Random Forest (RF)**:
 
   * **Akurasi**: 0.91
   * **Precision**: 0.89
@@ -333,7 +336,7 @@ Setelah melakukan pelatihan dan evaluasi model menggunakan **cross-validation**,
 
   Random Forest memberikan hasil yang sangat baik dalam mendeteksi anemia, dengan akurasi dan recall yang tinggi. Model ini berhasil mendeteksi sebagian besar individu yang menderita anemia, sambil mempertahankan tingkat kesalahan prediksi yang rendah.
 
-* **Logistic Regression (LR)**:
+- **Logistic Regression (LR)**:
 
   * **Akurasi**: 0.85
   * **Precision**: 0.87
@@ -342,7 +345,7 @@ Setelah melakukan pelatihan dan evaluasi model menggunakan **cross-validation**,
 
   Logistic Regression juga menunjukkan performa yang baik, meskipun sedikit lebih rendah dibandingkan dengan Random Forest dalam hal recall. Namun, precision yang baik mengindikasikan bahwa model ini cukup berhati-hati dalam memprediksi anemia.
 
-* **Decision Tree (DT)**:
+- **Decision Tree (DT)**:
 
   * **Akurasi**: 0.80
   * **Precision**: 0.78
@@ -351,7 +354,7 @@ Setelah melakukan pelatihan dan evaluasi model menggunakan **cross-validation**,
 
   Decision Tree memiliki performa yang lebih rendah dibandingkan dengan RF dan LR, terutama dalam hal precision. Ini menunjukkan bahwa pohon keputusan cenderung memprediksi lebih banyak **false positives**.
 
-* **K-Nearest Neighbors (KNN)**:
+- **K-Nearest Neighbors (KNN)**:
 
   * **Akurasi**: 0.82
   * **Precision**: 0.80
