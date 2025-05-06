@@ -1,2 +1,6 @@
-# Predictive-Analytics-Anemia
-Submission Proyek Predictive Analytics modul Machine Learning Terapan Dicoding
+# Laporan Proyek Machine Learning - Valensia Elsa Kurnia
+
+## Domain Proyek
+Anemia adalah gangguan kesehatan yang umum di seluruh dunia, yang ditandai dengan penurunan jumlah sel darah merah atau kadar hemoglobin dalam darah. Kondisi ini dapat menyebabkan berkurangnya kemampuan darah untuk mengangkut oksigen ke seluruh tubuh, yang berpotensi mengurangi kualitas hidup dan meningkatkan risiko komplikasi medis serius, seperti penyakit jantung. Berdasarkan data dari World Health Organization (WHO), sekitar 1,62 miliar orang di dunia menderita anemia, yang sering disebabkan oleh kekurangan zat besi atau defisiensi vitamin B12 [1]. Penyakit anemia biasanya terdeteksi melalui pemeriksaan medis yang memerlukan tes laboratorium untuk mengukur berbagai parameter darah, seperti kadar hemoglobin dan jumlah sel darah merah. Namun, prosedur ini dapat memakan waktu dan biaya. Selain itu, diagnosis sering kali terlambat, yang mengarah pada keterlambatan pengobatan dan peningkatan risiko komplikasi. 
+
+Masalah ini dapat diselesaikan dengan menerapkan machine learning dalam bentuk model prediktif untuk mendiagnosis anemia lebih cepat dan lebih akurat. Dengan memanfaatkan data medis seperti jumlah sel darah merah, kadar hemoglobin, dan ukuran rata-rata sel darah merah (MCV), model machine learning dapat memberikan diagnosis dini yang lebih efisien. Proyek ini menggunakan algoritma klasifikasi untuk menganalisis pola dalam data pasien dan memprediksi kemungkinan seseorang menderita anemia. Hal ini tidak hanya mempercepat proses diagnosis tetapi juga memungkinkan intervensi lebih cepat, yang dapat mencegah komplikasi lebih lanjut.
