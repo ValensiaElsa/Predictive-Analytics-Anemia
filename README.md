@@ -133,3 +133,137 @@ Mengingat adanya ketidakseimbangan kelas pada variabel target Result (lebih bany
 - **Feature Scaling**
     
 Proses scaling bertujuan untuk menyamakan rentang nilai pada setiap fitur dalam dataset, sehingga semua fitur berada pada skala yang serupa. Jika model machine learning tidak melakukan scaling, fitur dengan nilai yang lebih besar cenderung mendominasi hasil prediksi, sementara fitur dengan nilai yang lebih kecil memiliki dampak yang lebih rendah terhadap prediksi. Dalam proyek ini, fitur akan di-scale menggunakan metode standarisasi karena distribusi data cenderung mendekati normal, sehingga metode ini lebih sesuai digunakan. Standarisasi dilakukan dengan memanfaatkan fungsi StandardScaler() dari library sklearn, yang bekerja dengan mengurangi setiap nilai pada fitur dengan rata-rata fitur (mean), kemudian membagi hasilnya dengan standar deviasi. Hal ini memastikan bahwa semua fitur terpusat di sekitar nol dan memiliki variansi yang seragam.
+
+## Modeling
+
+Pada tahap ini, beberapa algoritma machine learning digunakan untuk memecahkan masalah klasifikasi anemia, yaitu **Random Forest (RF)**, **Decision Trees (DT)**, **Logistic Regression (LR)**, dan **K-Nearest Neighbors (KNN)**.
+
+### 1. **Random Forest (RF)**
+
+**Random Forest** adalah algoritma ensemble yang menggunakan banyak pohon keputusan untuk membuat prediksi. Setiap pohon dalam hutan dilatih menggunakan subset data yang berbeda, dan hasilnya digabungkan untuk meningkatkan akurasi model secara keseluruhan.
+
+#### Tahapan (Proses)
+
+- Pembagian data secara acak menjadi beberapa subset.
+- Membangun beberapa pohon keputusan pada subset data yang berbeda.
+- Menggunakan mayoritas suara untuk menghasilkan prediksi akhir.
+
+#### Parameter yang Digunakan
+
+- `n_estimators`: Jumlah pohon dalam hutan.
+- `max_depth`: Kedalaman maksimum pohon.
+- `min_samples_split`: Jumlah minimum sampel yang diperlukan untuk membagi internal pohon.
+- `min_samples_leaf`: Jumlah minimum sampel yang diperlukan di setiap daun pohon.
+
+#### Kelebihan
+
+- Mengurangi risiko **overfitting** dibandingkan pohon keputusan tunggal.
+- Cocok untuk dataset besar dan dapat menangani data yang tidak linier.
+- Memberikan nilai **feature importance** yang berguna untuk analisis lebih lanjut.
+
+#### Kekurangan
+
+- Proses pelatihan lebih lama jika jumlah pohon sangat besar.
+- Kurang interpretatif dibandingkan dengan model pohon keputusan tunggal.
+
+### 2. **Decision Trees (DT)**
+
+**Decision Tree** adalah algoritma yang membangun model dalam bentuk pohon keputusan untuk klasifikasi dan regresi. Setiap simpul pada pohon mewakili fitur, dan cabang mewakili keputusan berdasarkan nilai fitur tersebut.
+
+#### Tahapan (Proses)
+
+- Memilih fitur yang membagi dataset terbaik.
+- Membangun pohon keputusan berdasarkan pembagian terbaik hingga batas kedalaman pohon tercapai.
+
+#### Parameter yang Digunakan
+
+- `max_depth`: Kedalaman maksimum pohon.
+- `min_samples_split`: Jumlah minimum sampel yang diperlukan untuk membagi cabang pohon.
+- `min_samples_leaf`: Jumlah minimum sampel yang diperlukan pada daun pohon.
+- `criterion`: Fungsi untuk mengukur kualitas pembagian (misalnya, "gini" atau "entropy").
+
+#### Kelebihan
+
+- Mudah dipahami dan diinterpretasikan.
+- Cepat dalam proses pelatihan dan prediksi.
+- Dapat menangani fitur numerik dan kategorikal.
+
+#### Kekurangan
+
+- Rentan terhadap **overfitting**, terutama jika pohon terlalu dalam.
+- Kurang stabil pada data yang noise.
+
+### 3. **Logistic Regression (LR)**
+
+**Logistic Regression** adalah model linier yang digunakan untuk klasifikasi biner. Model ini memodelkan probabilitas dari kelas target menggunakan fungsi logistik.
+
+#### Tahapan (Proses)
+
+- Menghitung kombinasi linier dari fitur-fitur.
+- Menerapkan fungsi logistik untuk menghasilkan probabilitas antara 0 dan 1, kemudian mengklasifikasikan data berdasarkan threshold yang ditentukan.
+
+#### Parameter yang Digunakan
+
+- `penalty`: Jenis regulasi yang digunakan untuk menghindari overfitting (L1, L2).
+- `C`: Parameter untuk kontrol regulasi.
+- `solver`: Algoritma untuk optimasi (misalnya, "liblinear" atau "saga").
+
+#### Kelebihan
+
+- Efisien untuk dataset besar dengan fitur linier.
+- Memberikan probabilitas hasil, yang bisa digunakan untuk analisis lebih lanjut.
+- Cepat dalam pelatihan dan prediksi.
+
+#### Kekurangan
+
+- Tidak cocok untuk data dengan hubungan non-linier yang kompleks.
+- Kinerja dapat menurun jika fitur tidak terstandarisasi dengan baik.
+
+### 4. **K-Nearest Neighbors (KNN)**
+
+**K-Nearest Neighbors (KNN)** adalah algoritma non-parametrik yang mengklasifikasikan data berdasarkan mayoritas kelas dari **k** tetangga terdekatnya. Metrik jarak, seperti **Euclidean**, digunakan untuk menemukan tetangga terdekat.
+
+#### Tahapan (Proses)
+
+- Menghitung jarak antara titik data yang ingin diprediksi dengan semua titik data dalam training set.
+- Mengklasifikasikan data berdasarkan mayoritas kelas dari **k** tetangga terdekat.
+
+#### Parameter yang Digunakan
+
+- `n_neighbors`: Jumlah tetangga terdekat yang digunakan untuk klasifikasi.
+- `metric`: Metrik jarak yang digunakan untuk menghitung kedekatan (misalnya, "euclidean").
+- `weights`: Metode pembobotan tetangga (uniform atau distance).
+
+#### Kelebihan
+
+- Sederhana dan mudah dipahami.
+- Tidak memerlukan model eksplisit; hanya memerlukan data untuk melakukan prediksi.
+- Sangat baik untuk masalah dengan data tidak terstruktur.
+
+#### Kekurangan
+
+- Proses prediksi sangat lambat pada dataset besar, karena harus menghitung jarak ke semua titik data.
+- Rentan terhadap data yang berisik (noisy data) dan tidak efektif pada data dengan dimensi tinggi.
+
+
+### Hyperparameter Tuning
+
+Untuk meningkatkan performa model, **hyperparameter tuning** digunakan untuk menemukan kombinasi parameter yang optimal. Proses ini dilakukan dengan menggunakan **GridSearchCV** untuk mengeksplorasi berbagai nilai parameter dan memilih yang terbaik.
+
+Contoh kode tuning untuk **Random Forest**:
+
+```python
+from sklearn.model_selection import GridSearchCV
+param_grid = {
+    'n_estimators': [100, 200],
+    'max_depth': [10, 20, None],
+    'min_samples_split': [2, 5]
+}
+grid_search = GridSearchCV(RandomForestClassifier(), param_grid, cv=5, n_jobs=-1)
+grid_search.fit(X_train, y_train)
+best_rf = grid_search.best_estimator_
+```
+
+### Pemilihan Model Terbaik
+
+Setelah model dilatih dan diuji menggunakan teknik **cross-validation**, model yang memiliki hasil terbaik berdasarkan metrik evaluasi seperti **accuracy**, **precision**, **recall**, dan **F1-score** akan dipilih sebagai model terbaik. 
