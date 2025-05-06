@@ -320,8 +320,6 @@ Pada tahap ini, metrik evaluasi yang digunakan untuk mengukur performa model mel
 
 * **Hasil Proyek**: F1-Score yang baik menunjukkan bahwa model tidak hanya akurat dalam memprediksi anemia tetapi juga berhasil mendeteksi sebagian besar individu yang benar-benar menderita anemia, yang sangat penting dalam konteks kesehatan.
 
----
-
 ### Hasil Proyek Berdasarkan Metrik Evaluasi
 
 Setelah melakukan pelatihan dan evaluasi model menggunakan **cross-validation**, hasil yang didapatkan menunjukkan performa model yang beragam tergantung pada algoritma yang digunakan. Berikut adalah ringkasan metrik evaluasi untuk model yang diuji:
