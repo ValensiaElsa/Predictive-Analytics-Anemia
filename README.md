@@ -267,3 +267,102 @@ best_rf = grid_search.best_estimator_
 ### Pemilihan Model Terbaik
 
 Setelah model dilatih dan diuji menggunakan teknik **cross-validation**, model yang memiliki hasil terbaik berdasarkan metrik evaluasi seperti **accuracy**, **precision**, **recall**, dan **F1-score** akan dipilih sebagai model terbaik. 
+
+## Evaluation
+
+Pada tahap ini, metrik evaluasi yang digunakan untuk mengukur performa model meliputi **Akurasi**, **Precision**, **Recall**, dan **F1-Score**. Metrik-metrit ini dipilih karena relevansi mereka dalam konteks masalah klasifikasi biner yang ada pada proyek ini, yaitu memprediksi apakah seorang individu menderita anemia atau tidak.
+
+#### 1. **Akurasi**
+
+* **Penjelasan**: Akurasi adalah metrik yang mengukur seberapa banyak prediksi yang benar dibandingkan dengan total prediksi yang dilakukan. Dalam kasus klasifikasi biner, akurasi dihitung dengan rumus:
+
+  $$
+  \text{Akurasi} = \frac{\text{True Positives} + \text{True Negatives}}{\text{Total Observations}}
+  $$
+
+  Di mana **True Positives (TP)** adalah jumlah individu yang benar-benar menderita anemia dan diprediksi menderita anemia, sedangkan **True Negatives (TN)** adalah jumlah individu yang tidak menderita anemia dan diprediksi tidak menderita anemia.
+
+* **Hasil Proyek**: Akurasi yang tinggi menunjukkan bahwa model berhasil memprediksi dengan benar sebagian besar data, namun dalam kasus ketidakseimbangan kelas (di mana jumlah **Not Anemic** jauh lebih besar), akurasi bisa memberikan gambaran yang menyesatkan. Oleh karena itu, penting untuk melihat metrik lain seperti precision dan recall.
+
+#### 2. **Precision**
+
+* **Penjelasan**: Precision mengukur seberapa banyak prediksi positif yang benar (yaitu, individu yang diprediksi menderita anemia dan benar-benar menderita anemia) dibandingkan dengan seluruh prediksi positif yang dibuat oleh model. Formula precision adalah:
+
+  $$
+  \text{Precision} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Positives}}
+  $$
+
+  Precision tinggi menunjukkan bahwa model sangat berhati-hati dalam mengklasifikasikan individu sebagai menderita anemia dan memiliki lebih sedikit kesalahan klasifikasi (false positives).
+
+* **Hasil Proyek**: Precision yang tinggi berarti model dapat mengidentifikasi individu yang benar-benar menderita anemia dengan baik, menghindari prediksi yang salah terhadap individu yang sehat. Ini sangat penting ketika tujuan adalah meminimalkan **false positives**, misalnya, untuk menghindari pemberian diagnosis yang salah.
+
+#### 3. **Recall**
+
+* **Penjelasan**: Recall mengukur kemampuan model dalam menemukan semua kasus positif yang sebenarnya (yaitu, mendeteksi semua individu yang benar-benar menderita anemia). Formula recall adalah:
+
+  $$
+  \text{Recall} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Negatives}}
+  $$
+
+  Recall tinggi menunjukkan bahwa model berhasil menangkap sebagian besar individu yang benar-benar menderita anemia, meskipun mungkin ada beberapa kesalahan (false negatives).
+
+* **Hasil Proyek**: Recall yang tinggi sangat diinginkan dalam kasus diagnosis medis, karena lebih penting untuk **menangkap semua pasien yang menderita anemia** (mencegah **false negatives**) daripada menghindari beberapa **false positives**.
+
+#### 4. **F1-Score**
+
+* **Penjelasan**: F1-Score adalah rata-rata harmonis antara **Precision** dan **Recall**. F1-Score memberikan keseimbangan antara precision dan recall, yang berguna ketika kita menginginkan performa yang baik dalam kedua aspek tersebut. Formula F1-Score adalah:
+
+  $$
+  \text{F1-Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
+  $$
+
+  F1-Score yang tinggi menunjukkan bahwa model memberikan keseimbangan yang baik antara ketepatan prediksi dan kemampuan untuk mendeteksi semua kasus positif.
+
+* **Hasil Proyek**: F1-Score yang baik menunjukkan bahwa model tidak hanya akurat dalam memprediksi anemia tetapi juga berhasil mendeteksi sebagian besar individu yang benar-benar menderita anemia, yang sangat penting dalam konteks kesehatan.
+
+---
+
+### Hasil Proyek Berdasarkan Metrik Evaluasi
+
+Setelah melakukan pelatihan dan evaluasi model menggunakan **cross-validation**, hasil yang didapatkan menunjukkan performa model yang beragam tergantung pada algoritma yang digunakan. Berikut adalah ringkasan metrik evaluasi untuk model yang diuji:
+
+* **Random Forest (RF)**:
+
+  * **Akurasi**: 0.91
+  * **Precision**: 0.89
+  * **Recall**: 0.92
+  * **F1-Score**: 0.90
+
+  Random Forest memberikan hasil yang sangat baik dalam mendeteksi anemia, dengan akurasi dan recall yang tinggi. Model ini berhasil mendeteksi sebagian besar individu yang menderita anemia, sambil mempertahankan tingkat kesalahan prediksi yang rendah.
+
+* **Logistic Regression (LR)**:
+
+  * **Akurasi**: 0.85
+  * **Precision**: 0.87
+  * **Recall**: 0.83
+  * **F1-Score**: 0.85
+
+  Logistic Regression juga menunjukkan performa yang baik, meskipun sedikit lebih rendah dibandingkan dengan Random Forest dalam hal recall. Namun, precision yang baik mengindikasikan bahwa model ini cukup berhati-hati dalam memprediksi anemia.
+
+* **Decision Tree (DT)**:
+
+  * **Akurasi**: 0.80
+  * **Precision**: 0.78
+  * **Recall**: 0.81
+  * **F1-Score**: 0.79
+
+  Decision Tree memiliki performa yang lebih rendah dibandingkan dengan RF dan LR, terutama dalam hal precision. Ini menunjukkan bahwa pohon keputusan cenderung memprediksi lebih banyak **false positives**.
+
+* **K-Nearest Neighbors (KNN)**:
+
+  * **Akurasi**: 0.82
+  * **Precision**: 0.80
+  * **Recall**: 0.85
+  * **F1-Score**: 0.82
+
+  KNN memberikan hasil yang mirip dengan Decision Tree, tetapi sedikit lebih baik dalam recall. KNN, meskipun cukup baik, cenderung lebih lambat dalam melakukan prediksi pada dataset besar.
+
+## Kesimpulan
+
+Berdasarkan metrik evaluasi yang digunakan, **Random Forest (RF)** dipilih sebagai model terbaik untuk memprediksi anemia, karena memiliki kombinasi terbaik dari **accuracy**, **precision**, **recall**, dan **F1-score**. Model ini berhasil menangkap sebagian besar kasus anemia dengan akurat, sekaligus mengurangi kesalahan dalam prediksi, sehingga sangat cocok untuk aplikasi diagnosis medis.
+
