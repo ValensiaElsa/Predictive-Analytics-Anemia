@@ -126,7 +126,7 @@ Fitur pada Dataset Anemia sudah berbentuk numerik semua sehingga tidak perlu dil
 - **Data Splitting**
 
   Dataset akan dibagi menjadi dua bagian, yaitu data training dan testing (proporsi 80:20). Data training akan digunakan untuk melatih model, sedangkan data testing akan digunakan untuk mengevaluasi kinerja model yang sudah dibangun. Pemisahan data ini penting untuk menghindari overfitting dan memastikan model dapat diuji pada data yang tidak digunakan selama proses pelatihan. Berikut adalah jumlah data setelah dilakukan splitting. 
-| | Jumlah |
+| Data | Jumlah |
 | ------ | ------ |
 | Data Keseluruhan | 534 |
 | Data Train | 427 |
