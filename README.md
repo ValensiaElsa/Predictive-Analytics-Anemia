@@ -279,6 +279,7 @@ print("Best Params for Random Forest:", grid_rf.best_params_)
 best_rf = grid_rf.best_estimator_
 ```
 Berikut adalah parameter yang digunakan untuk pelatihan tiap model hasil dari hyperparameter tuning
+
   ![Hyperparameter Tuning Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/hyperparameter_tuning.png)
   
 ### Pemilihan Model Terbaik
