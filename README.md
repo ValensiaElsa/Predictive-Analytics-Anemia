@@ -69,7 +69,7 @@ Dataset yang digunakan dalam proyek ini adalah [Anemia Dataset](https://www.kagg
   ![Analisis Distribusi Histogram](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/analisis_distribusi_histogram.png)
 
   Berdasarkan analisis distribusi histogram, distribusi Hemoglobin cenderung terdistribusi dengan kemiringan ke kanan (skewed), dengan sebagian besar individu memiliki nilai normal antara 12 hingga 16 g/dL, namun ada juga beberapa individu dengan kadar yang sangat rendah, yang menunjukkan potensi anemia. Sementara MCH, MCHC, dan MCV memiliki variasi yang lebih terdistribusi merata
-  - **Analisis Distribusi Fitur menggunakan BoxPlot**
+- **Analisis Distribusi Fitur menggunakan BoxPlot**
   
   ![Analisis Distribusi BoxPlot](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/analisis_distribusi_fitur.png)
 
