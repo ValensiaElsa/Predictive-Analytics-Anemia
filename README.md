@@ -60,21 +60,26 @@ Dataset yang digunakan dalam proyek ini adalah [Anemia Dataset](https://www.kagg
 
 ### Exploratory Data Analysis
 - **Analisis Distribusi Kategorikal**
+  
   ![Analisis Distribusi Kategorikal Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/analisis_distribusi_kategorikal.png)
 
   Berdasarkan visualisasi data di atas, jumlah individu yang tidak menderita anemia lebih banyak dibandingkan dengan yang menderita anemia, dengan kategori Not Anemic yang jauh lebih dominan. Meskipun distribusi data relatif seimbang, ketidakseimbangan kelas antara Anemic dan Not Anemic tetap perlu diperhatikan. Oleh karena itu, model yang akan dibangun harus mempertimbangkan masalah ketidakseimbangan kelas ini, agar performa model tetap optimal dan tidak bias terhadap kelas mayoritas.
 - **Analisis Distribusi Fitur menggunakan BoxPlot**
+  
   ![Analisis Distribusi BoxPlot](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/analisis_distribusi_gender_result_hemoglobin.png)
 
   Pada grafik boxplot di atas, terlihat bahwa perempuan yang menderita anemia (ditandai dengan kotak merah) memiliki kadar Hemoglobin yang lebih rendah dibandingkan dengan laki-laki yang menderita anemia. Selain itu, perempuan yang tidak menderita anemia (kotak biru) menunjukkan kadar Hemoglobin yang lebih tinggi secara keseluruhan dibandingkan laki-laki. Secara umum, individu dengan anemia (baik perempuan maupun laki-laki) memiliki kadar Hemoglobin yang jauh lebih rendah dibandingkan dengan mereka yang tidak menderita anemia. Ini menunjukkan bahwa kadar Hemoglobin adalah indikator penting dalam mendeteksi anemia, dan ada perbedaan antara jenis kelamin dalam hal tingkat hemoglobin yang lebih rendah pada perempuan, yang umum terjadi pada anemia.
+  
   ![Analisis Distribusi BoxPlot](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/analisis_distribusi_fitur.png)
 
   Pada boxplot berikut, distribusi MCH antara individu yang menderita anemia dan yang tidak menderita anemia terlihat cukup serupa. Meskipun ada sedikit perbedaan, variabilitas MCH pada kedua kelompok ini hampir sama. Terlihat juga bahwa individu yang tidak menderita anemia memiliki nilai MCV yang sedikit lebih tinggi dibandingkan mereka yang menderita anemia. Distribusi MCHC antara individu dengan dan tanpa anemia cukup mirip, namun ada sedikit perbedaan. Fitur-fitur seperti MCH, MCV, dan MCHC menunjukkan sedikit perbedaan antara kelompok Anemic dan Not Anemic. Ini menunjukkan bahwa meskipun fitur ini penting, perbedaan yang lebih besar mungkin ada di fitur lainnya seperti Hemoglobin.
 - **Analisis Distribusi Fitur menggunakan Histogram**
+  
   ![Analisis Distribusi Histogram](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/analisis_distribusi_histogram.png)
 
   Berdasarkan analisis distribusi histogram, distribusi Hemoglobin cenderung terdistribusi dengan kemiringan ke kanan (skewed), dengan sebagian besar individu memiliki nilai normal antara 12 hingga 16 g/dL, namun ada juga beberapa individu dengan kadar yang sangat rendah, yang menunjukkan potensi anemia. Sementara MCH, MCHC, dan MCV memiliki variasi yang lebih terdistribusi merata
 - **Analisis Korelasi antar Fitur**
+  
   ![Analisis Korelasi](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/analisis_korelasi.png)
 
    Matriks korelasi menunjukkan bahwa Gender memiliki korelasi positif sedang dengan Result (Anemia), dengan nilai korelasi sekitar 0.23. Ini berarti ada sedikit kecenderungan bahwa perempuan lebih mungkin menderita anemia, yang konsisten dengan pengetahuan medis bahwa anemia lebih umum terjadi pada wanita. Korelasi negatif yang sangat kuat antara Hemoglobin dan Result (-0.79) menunjukkan bahwa Hemoglobin yang lebih rendah sangat berhubungan dengan individu yang menderita anemia. Hal ini memperkuat pemahaman bahwa hemoglobin adalah indikator utama dalam diagnosis anemia. Korelasi antara MCH, MCHC, dan Result sangat lemah, menunjukkan bahwa meskipun fitur-fitur ini berguna, mereka tidak sekuat Hemoglobin dalam memprediksi status anemia. Hemoglobin adalah fitur yang paling kuat terkait dengan status anemia, sedangkan MCH, MCV, dan MCHC menunjukkan hubungan yang lebih lemah dengan status anemia. Oleh karena itu, dalam pemodelan, Hemoglobin akan menjadi fitur yang sangat penting.
@@ -92,6 +97,7 @@ Data Preparation mencakup data cleaning dan data preprocessing yang penting untu
   df.isnull().sum()
   ```
   ![Missing Value](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/cek_missing_value.png)
+
   Namun, dalam dataset ini, saat dilakukan pengecekan tidak terdapat missing value sehingga tidak diperlukan penanganan missing value.
 - **Penghapusan Data Duplikat**
 
@@ -112,20 +118,27 @@ Data Preparation mencakup data cleaning dan data preprocessing yang penting untu
   Untuk mendeteksi outlier atau nilai ekstrem, teknik boxplot dan IQR digunakan untuk mengidentifikasi data yang berada di luar batas normal distribusi. Penananganan outlier diperlukan karena outlier yang tidak sesuai dengan pola data dapat mengganggu model, menghasilkan prediksi yang tidak akurat, dan menyebabkan overfitting. 
 
   ![Outlier](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/outlier.png)
+
   Pada dataset ini tidak ditemukan outlier.
 
 ### Data Preprocessing
 Fitur pada Dataset Anemia sudah berbentuk numerik semua sehingga tidak perlu dilakukan Encoding. Preprocessing yang dilakukan adalah sebagai berikut:
 - **Data Splitting**
 
-  Dataset akan dibagi menjadi dua bagian, yaitu data training dan testing (proporsi 80:20). Data training akan digunakan untuk melatih model, sedangkan data testing akan digunakan untuk mengevaluasi kinerja model yang sudah dibangun. Pemisahan data ini penting untuk menghindari overfitting dan memastikan model dapat diuji pada data yang tidak digunakan selama proses pelatihan.
+  Dataset akan dibagi menjadi dua bagian, yaitu data training dan testing (proporsi 80:20). Data training akan digunakan untuk melatih model, sedangkan data testing akan digunakan untuk mengevaluasi kinerja model yang sudah dibangun. Pemisahan data ini penting untuk menghindari overfitting dan memastikan model dapat diuji pada data yang tidak digunakan selama proses pelatihan. Berikut adalah jumlah data setelah dilakukan splitting. 
+| | Jumlah |
+| ------ | ------ |
+| Data Keseluruhan | 534 |
+| Data Train | 427 |
+| Data Set | 107 |
+
 - **Penanganan Imbalanced Classes**
 
-  Mengingat adanya ketidakseimbangan kelas pada variabel target Result (lebih banyak individu yang tidak menderita anemia), teknik seperti SMOTE (Synthetic Minority Over-sampling Technique) atau undersampling bisa diterapkan untuk memastikan bahwa model tidak terlalu bias terhadap kelas mayoritas (Not Anemic). Dalam hal ini, SMOTE bisa digunakan untuk menghasilkan lebih banyak sampel dari kelas Anemic.Ketidakseimbangan kelas dapat membuat model lebih cenderung memprediksi kelas mayoritas, mengabaikan kelas minoritas. Oleh karena itu, penanganan ketidakseimbangan kelas ini penting untuk menghasilkan model yang lebih akurat dan adil.
+  Mengingat adanya ketidakseimbangan kelas pada variabel target Result (lebih banyak individu yang tidak menderita anemia), teknik seperti SMOTE (Synthetic Minority Over-sampling Technique) atau undersampling bisa diterapkan untuk memastikan bahwa model tidak terlalu bias terhadap kelas mayoritas (Not Anemic). Dalam hal ini, SMOTE bisa digunakan untuk menghasilkan lebih banyak sampel dari kelas Anemic.Ketidakseimbangan kelas dapat membuat model lebih cenderung memprediksi kelas mayoritas, mengabaikan kelas minoritas. Oleh karena itu, penanganan ketidakseimbangan kelas ini penting untuk menghasilkan model yang lebih akurat dan adil. Berikut adalah perbandingan data sebelum dan setelah dilakukan SMOTE.
   ![Imbalance Class](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/imbalance_class.png)
 - **Feature Scaling**
     
-  Proses scaling bertujuan untuk menyamakan rentang nilai pada setiap fitur dalam dataset, sehingga semua fitur berada pada skala yang serupa. Jika model machine learning tidak melakukan scaling, fitur dengan nilai yang lebih besar cenderung mendominasi hasil prediksi, sementara fitur dengan nilai yang lebih kecil memiliki dampak yang lebih rendah terhadap prediksi. Dalam proyek ini, fitur akan di-scale menggunakan metode standarisasi karena distribusi data cenderung mendekati normal, sehingga metode ini lebih sesuai digunakan. Standarisasi dilakukan dengan memanfaatkan fungsi StandardScaler() dari library sklearn, yang bekerja dengan mengurangi setiap nilai pada fitur dengan rata-rata fitur (mean), kemudian membagi hasilnya dengan standar deviasi. Hal ini memastikan bahwa semua fitur terpusat di sekitar nol dan memiliki variansi yang seragam.
+  Proses scaling bertujuan untuk menyamakan rentang nilai pada setiap fitur dalam dataset, sehingga semua fitur berada pada skala yang serupa. Jika model machine learning tidak melakukan scaling, fitur dengan nilai yang lebih besar cenderung mendominasi hasil prediksi, sementara fitur dengan nilai yang lebih kecil memiliki dampak yang lebih rendah terhadap prediksi. Dalam proyek ini, fitur akan di-scale menggunakan metode standarisasi karena distribusi data cenderung mendekati normal, sehingga metode ini lebih sesuai digunakan. Standarisasi dilakukan dengan memanfaatkan fungsi StandardScaler() dari library sklearn, yang bekerja dengan mengurangi setiap nilai pada fitur dengan rata-rata fitur (mean), kemudian membagi hasilnya dengan standar deviasi. Hal ini memastikan bahwa semua fitur terpusat di sekitar nol dan memiliki variansi yang seragam. Berikut adalah hasil standarisasi data.
 
 ## Modeling
 
@@ -262,7 +275,7 @@ best_rf = grid_rf.best_estimator_
 
 ### Pemilihan Model Terbaik
 
-Decision Tree (DT) adalah pilihan yang sangat tepat untuk dataset kecil seperti ini karena model ini sederhana, cepat, dan efisien dalam melatih dan memprediksi dengan jumlah data terbatas. Dibandingkan dengan model yang lebih kompleks, Decision Tree dapat memberikan hasil yang cepat tanpa memerlukan banyak sumber daya komputasi. Selain itu, Decision Tree mudah untuk dituning dengan mengatur parameter seperti kedalaman pohon dan jumlah sampel minimum di cabang atau daun pohon, sehingga memungkinkan kontrol yang lebih baik terhadap risiko overfitting. Namun, meskipun Decision Tree memiliki banyak keunggulan, hasil evaluasi tetap harus diperhatikan untuk memastikan bahwa model ini memberikan performa yang optimal, dengan memeriksa metrik seperti accuracy, precision, recall, dan F1-score.
+Random Forest (RF) adalah pilihan terbaik untuk menangani dataset anemia dengan 534 data karena kemampuannya mengurangi risiko overfitting dengan menggunakan teknik ensemble, yang menghasilkan model lebih stabil dan akurat. Model ini dapat menangani hubungan non-linier antara fitur, memberikan feature importance untuk analisis lebih lanjut, dan tidak terpengaruh oleh skala fitur, sehingga memudahkan pemrosesan data. Selain itu, Random Forest dapat menangani data yang hilang, tidak memerlukan standarisasi fitur, dan tetap memberikan hasil yang konsisten meskipun dengan ukuran dataset yang relatif kecil. Kemampuan untuk melakukan hyperparameter tuning dan menyesuaikan dengan data yang ada menjadikannya lebih fleksibel dan kuat, menjadikannya pilihan yang lebih unggul dibandingkan dengan model lain seperti Decision Tree, Logistic Regression, atau KNN dalam menangani masalah klasifikasi biner ini. Namun, meskipun Random Forest memiliki banyak keunggulan, hasil evaluasi tetap harus diperhatikan untuk memastikan bahwa model ini memberikan performa yang optimal, dengan memeriksa metrik seperti accuracy, precision, recall, dan F1-score.
 
 ## Evaluation
 
@@ -318,47 +331,47 @@ Pada tahap ini, metrik evaluasi yang digunakan untuk mengukur performa model mel
 
 ### Hasil Proyek Berdasarkan Metrik Evaluasi
 
-Setelah melakukan pelatihan dan evaluasi model menggunakan **cross-validation**, hasil yang didapatkan menunjukkan performa model yang beragam tergantung pada algoritma yang digunakan. Berikut adalah ringkasan metrik evaluasi untuk model yang diuji:
+Setelah melakukan pelatihan dan evaluasi model menggunakan **cross-validation**, hasil yang didapatkan menunjukkan performa model yang beragam tergantung pada algoritma yang digunakan. Berikut adalah ringkasan metrik evaluasi untuk model yang diuji setelah dilakukan hyperparameter tuning:
 
 - **Random Forest (RF)**:
 
-  * **Akurasi**: 0.91
-  * **Precision**: 0.89
-  * **Recall**: 0.92
-  * **F1-Score**: 0.90
+  * **Akurasi**: 99.07%
+  * **Precision**: 99.08%
+  * **Recall**: 99.07%
+  * **F1-Score**: 99.07%
 
   Random Forest memberikan hasil yang sangat baik dalam mendeteksi anemia, dengan akurasi dan recall yang tinggi. Model ini berhasil mendeteksi sebagian besar individu yang menderita anemia, sambil mempertahankan tingkat kesalahan prediksi yang rendah.
 
-- **Logistic Regression (LR)**:
-
-  * **Akurasi**: 0.85
-  * **Precision**: 0.87
-  * **Recall**: 0.83
-  * **F1-Score**: 0.85
-
-  Logistic Regression juga menunjukkan performa yang baik, meskipun sedikit lebih rendah dibandingkan dengan Random Forest dalam hal recall. Namun, precision yang baik mengindikasikan bahwa model ini cukup berhati-hati dalam memprediksi anemia.
-
 - **Decision Tree (DT)**:
 
-  * **Akurasi**: 0.80
-  * **Precision**: 0.78
-  * **Recall**: 0.81
-  * **F1-Score**: 0.79
+  * **Akurasi**: 99.07%
+  * **Precision**: 99.08%
+  * **Recall**: 99.07%
+  * **F1-Score**: 99.07%
+    
+  Meskipun hasilnya hampir serupa dengan Random Forest, Decision Tree bisa lebih rentan terhadap overfitting dibandingkan dengan Random Forest karena tidak menggunakan ensemble learning, yang dapat membatasi kemampuan model untuk generalisasi pada data baru.
 
-  Decision Tree memiliki performa yang lebih rendah dibandingkan dengan RF dan LR, terutama dalam hal precision. Ini menunjukkan bahwa pohon keputusan cenderung memprediksi lebih banyak **false positives**.
+- **Logistic Regression (LR)**:
 
+  * **Akurasi**: 97.20%
+  * **Precision**: 97.35%
+  * **Recall**: 97.20%
+  * **F1-Score**: 97.20%
+  
+  Logistic Regression memberikan hasil solid, tetapi model ini menunjukkan kinerja yang lebih rendah dibandingkan dengan Random Forest dan Decision Tree, terutama dalam Recall, yang berarti model ini sedikit lebih sering melewatkan individu dengan anemia.
+  
 - **K-Nearest Neighbors (KNN)**:
 
-  * **Akurasi**: 0.82
-  * **Precision**: 0.80
-  * **Recall**: 0.85
-  * **F1-Score**: 0.82
-
-  KNN memberikan hasil yang mirip dengan Decision Tree, tetapi sedikit lebih baik dalam recall. KNN, meskipun cukup baik, cenderung lebih lambat dalam melakukan prediksi pada dataset besar.
+  * **Akurasi**: 90.65%
+  * **Precision**: 91.69%
+  * **Recall**: 90.65%
+  * **F1-Score**: 90.65%
+    
+  KNN memberikan hasil Precision dan Recall yang seimbang. Namun, KNN menunjukkan hasil yang lebih rendah dibandingkan dengan model lainnya, yang mengindikasikan bahwa KNN tidak optimal untuk dataset ini dan cenderung lebih sering melewatkan individu dengan anemia.
 
 ## Kesimpulan
 
-Berdasarkan metrik evaluasi yang digunakan, **Decision Tree (DT)** dipilih sebagai model terbaik untuk memprediksi anemia, karena memiliki kombinasi terbaik dari **accuracy**, **precision**, **recall**, dan **F1-score**. Model ini berhasil menangkap sebagian besar kasus anemia dengan akurat, sekaligus mengurangi kesalahan dalam prediksi, sehingga sangat cocok untuk aplikasi diagnosis medis.
+**Recall** yang tinggi sangat diinginkan dalam kasus diagnosis medis, karena **lebih penting** untuk **menangkap semua pasien yang menderita anemia** (mencegah **false negatives**) daripada menghindari beberapa **false positives**. Dalam konteks ini, **false negatives** (pasien yang seharusnya didiagnosis anemia tetapi tidak terdeteksi) dapat berakibat fatal karena pasien tersebut tidak menerima perawatan yang diperlukan. Oleh karena itu, model dengan **Recall** yang lebih tinggi, seperti **Random Forest**, sangat diutamakan untuk memastikan bahwa sebanyak mungkin individu yang menderita anemia dapat terdeteksi dan diberi penanganan yang tepat. Selain itu, model Random Forest juga memberikan hasil metrik evaluasi yang sangat tinggi. Meskipun Decission Tree juga memberikan hasil evaluasi yang sama, tetapi Random Forest sedikit lebih unggul karena kemampuannya dalam mengurangi overfitting melalui teknik ensemble sehingga Random Forest dipilih menjadi model terbaik.
 
 ## Referensi:
 
