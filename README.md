@@ -379,10 +379,21 @@ Setelah melakukan pelatihan dan evaluasi model menggunakan **cross-validation**,
   * **F1-Score**: 90.65%
     
   KNN memberikan hasil Precision dan Recall yang seimbang. Namun, KNN menunjukkan hasil yang lebih rendah dibandingkan dengan model lainnya, yang mengindikasikan bahwa KNN tidak optimal untuk dataset ini dan cenderung lebih sering melewatkan individu dengan anemia.
-
-## Kesimpulan
+  
+### Model Terbaik Berdasarkan Metrik Evaluasi
 
 **Recall** yang tinggi sangat diinginkan dalam kasus diagnosis medis, karena **lebih penting** untuk **menangkap semua pasien yang menderita anemia** (mencegah **false negatives**) daripada menghindari beberapa **false positives**. Dalam konteks ini, **false negatives** (pasien yang seharusnya didiagnosis anemia tetapi tidak terdeteksi) dapat berakibat fatal karena pasien tersebut tidak menerima perawatan yang diperlukan. Oleh karena itu, model dengan **Recall** yang lebih tinggi, seperti **Random Forest**, sangat diutamakan untuk memastikan bahwa sebanyak mungkin individu yang menderita anemia dapat terdeteksi dan diberi penanganan yang tepat. Selain itu, model Random Forest juga memberikan hasil metrik evaluasi yang sangat tinggi. Meskipun Decission Tree juga memberikan hasil evaluasi yang sama, tetapi Random Forest sedikit lebih unggul karena kemampuannya dalam mengurangi overfitting melalui teknik ensemble sehingga Random Forest dipilih menjadi model terbaik.
+
+### **Evaluasi Terhadap Business Understanding**
+
+* **Menjawab Problem Statement:** Model yang dibuat berhasil menjawab problem statement dengan memprediksi apakah seseorang menderita anemia berdasarkan data medis dasar (seperti kadar hemoglobin, MCV, MCH, dan MCHC). Model yang dibangun menggunakan algoritma machine learning berhasil melakukan klasifikasi **Anemic** dan **Not Anemic** berdasarkan data yang ada, tanpa perlu menggunakan tes laboratorium yang mahal. Model berhasil memberikan solusi untuk masalah utama, yaitu diagnosis dini anemia yang lebih cepat, murah, dan lebih mudah diakses oleh masyarakat.
+
+* **Mencapai Goals:** Model Random Forest dengan hyperparameter yang dioptimalkan berhasil mencapai tujuan untuk memberikan prediksi yang akurat mengenai status anemia dan meningkatkan performa model melalui optimasi hyperparameter. Selain itu, perbandingan algoritma machine learning seperti Logistic Regression, Decision Trees, dan Random Forest dengan metrik evaluasi yang tepat (akurasi, precision, recall, F1-score) memungkinkan pemilihan model terbaik untuk mendeteksi anemia. Model yang dihasilkan sudah memenuhi tujuan untuk memberikan prediksi yang lebih baik dan lebih efisien. Hyperparameter tuning meningkatkan akurasi model, dan penggunaan berbagai algoritma memberikan perspektif yang lebih luas mengenai solusi yang optimal.
+
+* **Dampak dari Solution Statement:** Penggunaan beberapa algoritma dan hyperparameter tuning memberikan dampak positif yang signifikan dalam meningkatkan akurasi dan kinerja model. Hasil model yang dioptimalkan dapat digunakan untuk memilih model terbaik berdasarkan metrik evaluasi yang relevan, serta meminimalkan kesalahan prediksi, seperti false positives dan false negatives. Dampak dari solusi yang diberikan cukup besar, karena penggunaan teknik seperti **Grid Search** untuk hyperparameter tuning dan perbandingan model memberikan model yang lebih tepat dan efisien dalam mendeteksi anemia. Ini memberikan potensi besar untuk diterapkan dalam sistem kesehatan dengan biaya rendah dan kecepatan tinggi.
+
+## Kesimpulan
+Proyek ini berhasil mengembangkan model machine learning untuk mendeteksi anemia dengan menggunakan data medis dasar seperti kadar hemoglobin, MCV, MCH, dan MCHC. Dengan menggunakan algoritma seperti Random Forest, Logistic Regression, dan Decision Trees, serta penerapan hyperparameter tuning melalui Grid Search, model ini mampu memberikan prediksi yang akurat dan efisien. Hasil evaluasi menunjukkan bahwa Random Forest memberikan performa terbaik dalam mendeteksi anemia, dengan akurasi, precision, recall, dan F1-score yang tinggi. Model ini dapat diterapkan untuk diagnosis dini anemia dengan biaya rendah dan waktu yang lebih cepat, memberikan solusi yang efektif untuk masalah keterlambatan diagnosis.
 
 ## Referensi:
 
