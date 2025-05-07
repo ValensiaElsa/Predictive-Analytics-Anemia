@@ -127,11 +127,11 @@ Fitur pada Dataset Anemia sudah berbentuk numerik semua sehingga tidak perlu dil
 
   Dataset akan dibagi menjadi dua bagian, yaitu data training dan testing (proporsi 80:20). Data training akan digunakan untuk melatih model, sedangkan data testing akan digunakan untuk mengevaluasi kinerja model yang sudah dibangun. Pemisahan data ini penting untuk menghindari overfitting dan memastikan model dapat diuji pada data yang tidak digunakan selama proses pelatihan. Berikut adalah jumlah data setelah dilakukan splitting.
 
-| Data              | Jumlah |
-|-------------------|--------|
-| Data Keseluruhan  | 534    |
-| Data Train        | 427    |
-| Data Test         | 107    |
+  | Data              | Jumlah |
+  |-------------------|--------|
+  | Data Keseluruhan  | 534    |
+  | Data Train        | 427    |
+  | Data Test         | 107    |
 
 - **Penanganan Imbalanced Classes**
 
@@ -147,6 +147,7 @@ Fitur pada Dataset Anemia sudah berbentuk numerik semua sehingga tidak perlu dil
 Pada tahap ini, beberapa algoritma machine learning digunakan untuk memecahkan masalah klasifikasi anemia, yaitu **Random Forest (RF)**, **Decision Trees (DT)**, **Logistic Regression (LR)**, dan **K-Nearest Neighbors (KNN)**.
 
 ### 1. **Random Forest (RF)**
+![RF Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/random_forest.jpg)
 
 **Random Forest** adalah algoritma ensemble yang menggunakan banyak pohon keputusan untuk membuat prediksi. Setiap pohon dalam hutan dilatih menggunakan subset data yang berbeda, dan hasilnya digabungkan untuk meningkatkan akurasi model secara keseluruhan.
 
@@ -175,6 +176,7 @@ Pada tahap ini, beberapa algoritma machine learning digunakan untuk memecahkan m
 - Kurang interpretatif dibandingkan dengan model pohon keputusan tunggal.
 
 ### 2. **Decision Trees (DT)**
+![DT Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/decission_tree.png)
 
 **Decision Tree** adalah algoritma yang membangun model dalam bentuk pohon keputusan untuk klasifikasi dan regresi. Setiap simpul pada pohon mewakili fitur, dan cabang mewakili keputusan berdasarkan nilai fitur tersebut.
 
@@ -202,6 +204,7 @@ Pada tahap ini, beberapa algoritma machine learning digunakan untuk memecahkan m
 - Kurang stabil pada data yang noise.
 
 ### 3. **Logistic Regression (LR)**
+![LR Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/logistic_regression.png)
 
 **Logistic Regression** adalah model linier yang digunakan untuk klasifikasi biner. Model ini memodelkan probabilitas dari kelas target menggunakan fungsi logistik.
 
@@ -228,6 +231,7 @@ Pada tahap ini, beberapa algoritma machine learning digunakan untuk memecahkan m
 - Kinerja dapat menurun jika fitur tidak terstandarisasi dengan baik.
 
 ### 4. **K-Nearest Neighbors (KNN)**
+![KNN Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/knn.png)
 
 **K-Nearest Neighbors (KNN)** adalah algoritma non-parametrik yang mengklasifikasikan data berdasarkan mayoritas kelas dari **k** tetangga terdekatnya. Metrik jarak, seperti **Euclidean**, digunakan untuk menemukan tetangga terdekat.
 
