@@ -112,7 +112,7 @@ Data Preparation mencakup data cleaning dan data preprocessing yang penting untu
   # Menghapus baris duplikat
   df = df.drop_duplicates()
   ```
-  Pada dataset ini, ditemukan 887 baris duplikat yang kemudian dihapus.
+  Pada dataset ini, ditemukan 887 baris duplikat yang kemudian dihapus. Sisa data setelah pembersihan baris duplikat adalah 534. Data yang terduplikasi memang cukup banyak, tetapi sisa data yang bersih sebanyak 534 (di atas 500) masih bisa untuk digunakan.
 - **Penanganan Outlier**
 
   Untuk mendeteksi outlier atau nilai ekstrem, teknik boxplot dan IQR digunakan untuk mengidentifikasi data yang berada di luar batas normal distribusi. Penananganan outlier diperlukan karena outlier yang tidak sesuai dengan pola data dapat mengganggu model, menghasilkan prediksi yang tidak akurat, dan menyebabkan overfitting. 
