@@ -139,6 +139,7 @@ Fitur pada Dataset Anemia sudah berbentuk numerik semua sehingga tidak perlu dil
 - **Feature Scaling**
     
   Proses scaling bertujuan untuk menyamakan rentang nilai pada setiap fitur dalam dataset, sehingga semua fitur berada pada skala yang serupa. Jika model machine learning tidak melakukan scaling, fitur dengan nilai yang lebih besar cenderung mendominasi hasil prediksi, sementara fitur dengan nilai yang lebih kecil memiliki dampak yang lebih rendah terhadap prediksi. Dalam proyek ini, fitur akan di-scale menggunakan metode standarisasi karena distribusi data cenderung mendekati normal, sehingga metode ini lebih sesuai digunakan. Standarisasi dilakukan dengan memanfaatkan fungsi StandardScaler() dari library sklearn, yang bekerja dengan mengurangi setiap nilai pada fitur dengan rata-rata fitur (mean), kemudian membagi hasilnya dengan standar deviasi. Hal ini memastikan bahwa semua fitur terpusat di sekitar nol dan memiliki variansi yang seragam. Berikut adalah hasil standarisasi data.
+  ![Standarisasi Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/standarisasi.png)
 
 ## Modeling
 
@@ -272,7 +273,9 @@ grid_rf.fit(X_train_scaled, y_train_resampled)
 print("Best Params for Random Forest:", grid_rf.best_params_)
 best_rf = grid_rf.best_estimator_
 ```
-
+Berikut adalah parameter yang digunakan untuk pelatihan tiap model hasil dari hyperparameter tuning
+  ![Hyperparameter Tuning Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/hyperparameter_tuning.png)
+  
 ### Pemilihan Model Terbaik
 
 Random Forest (RF) adalah pilihan terbaik untuk menangani dataset anemia dengan 534 data karena kemampuannya mengurangi risiko overfitting dengan menggunakan teknik ensemble, yang menghasilkan model lebih stabil dan akurat. Model ini dapat menangani hubungan non-linier antara fitur, memberikan feature importance untuk analisis lebih lanjut, dan tidak terpengaruh oleh skala fitur, sehingga memudahkan pemrosesan data. Selain itu, Random Forest dapat menangani data yang hilang, tidak memerlukan standarisasi fitur, dan tetap memberikan hasil yang konsisten meskipun dengan ukuran dataset yang relatif kecil. Kemampuan untuk melakukan hyperparameter tuning dan menyesuaikan dengan data yang ada menjadikannya lebih fleksibel dan kuat, menjadikannya pilihan yang lebih unggul dibandingkan dengan model lain seperti Decision Tree, Logistic Regression, atau KNN dalam menangani masalah klasifikasi biner ini. Namun, meskipun Random Forest memiliki banyak keunggulan, hasil evaluasi tetap harus diperhatikan untuk memastikan bahwa model ini memberikan performa yang optimal, dengan memeriksa metrik seperti accuracy, precision, recall, dan F1-score.
@@ -332,6 +335,8 @@ Pada tahap ini, metrik evaluasi yang digunakan untuk mengukur performa model mel
 ### Hasil Proyek Berdasarkan Metrik Evaluasi
 
 Setelah melakukan pelatihan dan evaluasi model menggunakan **cross-validation**, hasil yang didapatkan menunjukkan performa model yang beragam tergantung pada algoritma yang digunakan. Berikut adalah ringkasan metrik evaluasi untuk model yang diuji setelah dilakukan hyperparameter tuning:
+
+  ![Evaluasi Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/evaluasi.png)
 
 - **Random Forest (RF)**:
 
