@@ -16,19 +16,19 @@ Dengan penggunaan machine learning dalam analisis prediktif, kita dapat memanfaa
 Berdasarkan uraian yang telah dipaparkan pada latar belakang diatas, maka dapat diambil sebuah rumusan masalah yang dirumuskan sebagai berikut:
 - Bagaimana cara memprediksi apakah seseorang menderita anemia hanya dengan menggunakan data medis dasar seperti kadar hemoglobin, MCV (Mean Corpuscular Volume), MCH (Mean Corpuscular Hemoglobin), dan MCHC (Mean Corpuscular Hemoglobin Concentration), tanpa memerlukan tes laboratorium yang mahal dan memakan waktu?
 - Dari serangkaian fitur yang ada, fitur apa yang paling berpengaruh untuk mendeteksi anemia?
-- Bagaimana meningkatkan kinerja model prediktif untuk mendeteksi anemia?
+- Bagaimana mengukur dan meningkatkan kinerja model prediktif untuk mendeteksi anemia?
 
 ### Goals
 Berdasarkan rumusan masalah yang telah dipaparkan di atas, maka proyek penelitian ini memiliki tujuan, yaitu:
 - Membangun model prediksi berbasis machine learning yang dapat memberikan diagnosis dini anemia dengan data medis dasar, seperti jumlah sel darah merah, kadar hemoglobin, MCV, MCH, dan MCHC.
 - Mengetahui fitur yang paling berpengaruh untuk mendeteksi anemia.
-- Meningkatkan kinerja model prediktif dengan menggunakan hyperparameter tuning untuk memperoleh hasil yang lebih optimal.
+- Mengukur dan meningkatkan kinerja model prediktif dengan menggunakan berbagai algoritma machine learning serta melakukan hyperparameter tuning untuk memperoleh hasil yang lebih optimal.
 
 ### Solution statements
 Berdasarkan tujuan yang telah dipaparkan diatas, maka proyek penelitian ini memiliki solusi atau tahapan sebagai berikut:
 - Menggunakan beberapa algoritma machine learning, seperti Logistic Regression, Decision Trees, Random Forest, dan K-Nearest Neighbors untuk membangun model klasifikasi anemia yang dapat memprediksi status anemia berdasarkan data medis yang ada dan akan dipilih satu model dengan kinerja model terbaik.
 - Melakukan eksplorasi data awal (Exploratory Data Analysis, EDA) untuk menganalisis korelasi antar fitur, mengidentifikasi hubungan antara variabel medis dengan status anemia, dan menentukan fitur yang memiliki kontribusi signifikan dalam mendeteksi anemia.
-- Menerapkan hyperparameter tuning dengan menggunakan teknik Grid Search untuk memilih kombinasi parameter terbaik pada masing-masing algoritma dan meningkatkan kinerja model.
+- Menerapkan hyperparameter tuning dengan menggunakan teknik Grid Search untuk memilih kombinasi parameter terbaik pada masing-masing algoritma dan meningkatkan kinerja model. Kinerja model akan diukur dengan menggunakan metrik evaluasi seperti akurasi, precision, recall, dan F1-score, yang akan membantu dalam memilih model terbaik berdasarkan hasil prediksi yang paling optimal
 
 ## Data Understanding
 
@@ -476,7 +476,7 @@ Secara keseluruhan, **Random Forest** tetap menjadi model yang paling disarankan
 
 * Dengan menggunakan metode Exploratory Data Analysis (EDA), ditemukan bahwa **Hemoglobin adalah fitur yang paling berpengaruh** dalam memprediksi status anemia. Korelasi yang sangat kuat antara kadar hemoglobin dan status anemia menunjukkan bahwa fitur ini adalah indikator utama dalam diagnosis anemia. Fitur-fitur lainnya seperti MCV dan MCHC juga berkontribusi, meskipun dengan pengaruh yang lebih rendah.
 
-* **Kinerja model berhasil ditingkatkan** melalui penerapan hyperparameter tuning menggunakan Grid Search. Proses ini memungkinkan pencarian kombinasi parameter terbaik untuk algoritma yang digunakan. Setelah tuning, model menunjukkan peningkatan dalam metrik evaluasi seperti accuracy, precision, recall, dan F1-score, yang membuatnya lebih akurat dalam mendeteksi status anemia.
+* **Kinerja model berhasil diukur** menggunakan metrik evaluasi (akurasi, presisi, recall, dan F-1 Score), dan **ditingkatkan** melalui penerapan hyperparameter tuning menggunakan Grid Search. Proses ini memungkinkan pencarian kombinasi parameter terbaik untuk algoritma yang digunakan. Setelah tuning, model menunjukkan peningkatan dalam metrik evaluasi seperti accuracy, precision, recall, dan F1-score, yang membuatnya lebih akurat dalam mendeteksi status anemia.
 
 ## Kesimpulan
 Proyek ini berhasil mengembangkan model machine learning untuk mendeteksi anemia dengan menggunakan data medis dasar seperti kadar hemoglobin, MCV, MCH, dan MCHC. Dengan menggunakan algoritma seperti Random Forest, Logistic Regression, dan Decision Trees, serta penerapan hyperparameter tuning melalui Grid Search, model ini mampu memberikan prediksi yang akurat dan efisien. Hasil evaluasi menunjukkan bahwa Random Forest memberikan performa terbaik dalam mendeteksi anemia, dengan akurasi, precision, recall, dan F1-score yang tinggi. Model ini dapat diterapkan untuk diagnosis dini anemia dengan biaya rendah dan waktu yang lebih cepat, memberikan solusi yang efektif untuk masalah keterlambatan diagnosis.
