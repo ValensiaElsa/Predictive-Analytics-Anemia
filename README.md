@@ -60,7 +60,7 @@ Dataset yang digunakan dalam proyek ini adalah [Anemia Dataset](https://www.kagg
 - MCV : *Mean Corpuscular Volume* merupakan volume rata-rata sel darah merah.
 - Results : merupakan label yang menunjukkan individu menderita anemia atau tidak (0 = Tidak anemia, 1 = Anemia), result adalah fitur target.
 
-Semua kolom bertipe data numerik dengan 4 fitur bertipe data float64(Hemoglobin, MCH, MCHC, dan MCV) dan 2 fitur bertipe data int64 (Gender dan Result). Uraian di atas menunjukkan bahwa setiap kolom telah memiliki tipe data yang sesuai dan dikarenakan semua fitur adalah numerik, maka tidak diperlukan encoding untuk pelatihan. Namun, pada saat EDA kolom Result dan Gender akan diubah sementara ke bentuk kategorikal untuk mempermudah proses EDA yang kemudian akan dikembalikan ke bentuk semula.
+Semua kolom bertipe data numerik dengan 4 fitur bertipe data float64 (Hemoglobin, MCH, MCHC, dan MCV) dan 2 fitur bertipe data int64 (Gender dan Result). Uraian di atas menunjukkan bahwa setiap kolom telah memiliki tipe data yang sesuai dan dikarenakan semua fitur adalah numerik, maka tidak diperlukan encoding untuk pelatihan. Namun, pada saat EDA kolom Result dan Gender akan diubah sementara ke bentuk kategorikal untuk mempermudah proses EDA yang kemudian akan dikembalikan ke bentuk semula.
 
 ![Deskripsi Statistik Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/deskripsi_statistik.png)
 
@@ -79,6 +79,7 @@ Berdasarkan pengecekan deskripsi statistik, kolom Gender dan Result memiliki dis
   ![Missing Value](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/cek_missing_value.png)
 
   Namun, dalam dataset ini, saat dilakukan pengecekan tidak terdapat missing value sehingga tidak diperlukan penanganan missing value.
+  
 **Penghapusan Data Duplikat**
 
   Langkah selanjutnya adalah memeriksa apakah ada data duplikat di dalam dataset. Data duplikat dapat terjadi akibat kesalahan saat pengumpulan atau proses input data. Baris-baris yang memiliki nilai identik di seluruh fitur akan diperiksa dan dihapus jika ditemukan. Data duplikat harus dihapus karena dapat menyebabkan model memberikan bobot berlebih pada informasi yang sama, yang dapat mengarah pada overfitting atau kesalahan dalam pelatihan model. Penghapusan data duplikat memastikan bahwa model hanya belajar dari data yang unik dan relevan. 
@@ -93,6 +94,7 @@ Berdasarkan pengecekan deskripsi statistik, kolom Gender dan Result memiliki dis
   df = df.drop_duplicates()
   ```
   Pada dataset ini, ditemukan 887 baris duplikat yang kemudian dihapus. Sisa data setelah pembersihan baris duplikat adalah 534. Data yang terduplikasi memang cukup banyak, tetapi sisa data yang bersih sebanyak 534 (di atas 500) masih bisa untuk digunakan.
+  
 **Penanganan Outlier**
 
   Untuk mendeteksi outlier atau nilai ekstrem, teknik boxplot dan IQR digunakan untuk mengidentifikasi data yang berada di luar batas normal distribusi. Penananganan outlier diperlukan karena outlier yang tidak sesuai dengan pola data dapat mengganggu model, menghasilkan prediksi yang tidak akurat, dan menyebabkan overfitting. 
@@ -100,6 +102,7 @@ Berdasarkan pengecekan deskripsi statistik, kolom Gender dan Result memiliki dis
   ![Outlier](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/outlier.png)
 
   Pada dataset ini tidak ditemukan outlier.
+  
 **Univariate Analysis**
 - **Analisis Distribusi Data Kategorikal**
   
@@ -137,6 +140,7 @@ Fitur pada Dataset Anemia sudah berbentuk numerik semua sehingga tidak perlu dil
 - **Data Splitting**
 
   Dataset akan dibagi menjadi dua bagian, yaitu data training dan testing (proporsi 80:20). Data training akan digunakan untuk melatih model, sedangkan data testing akan digunakan untuk mengevaluasi kinerja model yang sudah dibangun. Pemisahan data ini penting untuk menghindari overfitting dan memastikan model dapat diuji pada data yang tidak digunakan selama proses pelatihan. Kita harus membagi data agar proses transformasi hanya dilakukan pada data latih saja. Data uji harus berperan sebagai data baru yang tidak terpengaruh oleh proses pelatihan, untuk menilai bagaimana model bekerja pada data yang belum pernah dilihat sebelumnya.
+  
   Berikut adalah jumlah data setelah dilakukan splitting.
 
   | Data              | Jumlah |
@@ -152,6 +156,7 @@ Fitur pada Dataset Anemia sudah berbentuk numerik semua sehingga tidak perlu dil
 - **Feature Scaling**
     
   Proses scaling bertujuan untuk menyamakan rentang nilai pada setiap fitur dalam dataset, sehingga semua fitur berada pada skala yang serupa. Jika model machine learning tidak melakukan scaling, fitur dengan nilai yang lebih besar cenderung mendominasi hasil prediksi, sementara fitur dengan nilai yang lebih kecil memiliki dampak yang lebih rendah terhadap prediksi. Dalam proyek ini, fitur akan di-scale menggunakan metode standarisasi karena distribusi data cenderung mendekati normal, sehingga metode ini lebih sesuai digunakan. Standarisasi dilakukan dengan memanfaatkan fungsi StandardScaler() dari library sklearn, yang bekerja dengan mengurangi setiap nilai pada fitur dengan rata-rata fitur (mean), kemudian membagi hasilnya dengan standar deviasi. Hal ini memastikan bahwa semua fitur terpusat di sekitar nol dan memiliki variansi yang seragam.
+  
   Untuk menghindari kebocoran informasi pada data uji, kita hanya akan menerapkan fitur standarisasi pada data latih. Berikut adalah hasil standarisasi data. 
   
   ![Standarisasi Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/standarisasi.png)
@@ -326,7 +331,7 @@ Berikut adalah parameter yang digunakan untuk pelatihan tiap model hasil dari hy
   
 ### Pemilihan Model Terbaik
 
-Random Forest (RF) adalah pilihan terbaik untuk menangani dataset anemia dengan 534 data karena kemampuannya mengurangi risiko overfitting dengan menggunakan teknik ensemble, yang menghasilkan model lebih stabil dan akurat. Model ini dapat menangani hubungan non-linier antara fitur, memberikan feature importance untuk analisis lebih lanjut, dan tidak terpengaruh oleh skala fitur, sehingga memudahkan pemrosesan data. Selain itu, Random Forest dapat menangani data yang hilang, tidak memerlukan standarisasi fitur, dan tetap memberikan hasil yang konsisten meskipun dengan ukuran dataset yang relatif kecil. Kemampuan untuk melakukan hyperparameter tuning dan menyesuaikan dengan data yang ada menjadikannya lebih fleksibel dan kuat, menjadikannya pilihan yang lebih unggul dibandingkan dengan model lain seperti Decision Tree, Logistic Regression, atau KNN dalam menangani masalah klasifikasi biner ini. Namun, meskipun Random Forest memiliki banyak keunggulan, hasil evaluasi tetap harus diperhatikan untuk memastikan bahwa model ini memberikan performa yang optimal, dengan memeriksa metrik seperti accuracy, precision, recall, dan F1-score.
+Random Forest (RF) adalah pilihan terbaik untuk menangani dataset anemia dengan 534 data karena kemampuannya mengurangi risiko overfitting dengan menggunakan teknik ensemble, yang menghasilkan model lebih stabil dan akurat. Model ini dapat menangani hubungan non-linier antara fitur, memberikan feature importance untuk analisis lebih lanjut, dan tidak terpengaruh oleh skala fitur, sehingga memudahkan pemrosesan data. Selain itu, Random Forest dapat menangani data yang hilang, tidak memerlukan standarisasi fitur, dan tetap memberikan hasil yang konsisten meskipun dengan ukuran dataset yang relatif kecil. Namun, meskipun Random Forest memiliki banyak keunggulan, hasil evaluasi tetap harus diperhatikan untuk memastikan bahwa model ini memberikan performa yang optimal, dengan memeriksa metrik seperti accuracy, precision, recall, dan F1-score.
 
 ## Evaluation
 
@@ -340,9 +345,7 @@ Pada tahap ini, metrik evaluasi yang digunakan untuk mengukur performa model mel
   \text{Akurasi} = \frac{\text{True Positives} + \text{True Negatives}}{\text{Total Observations}}
   $$
 
-  Di mana **True Positives (TP)** adalah jumlah individu yang benar-benar menderita anemia dan diprediksi menderita anemia, sedangkan **True Negatives (TN)** adalah jumlah individu yang tidak menderita anemia dan diprediksi tidak menderita anemia.
-
-  Akurasi yang tinggi menunjukkan bahwa model berhasil memprediksi dengan benar sebagian besar data, namun dalam kasus ketidakseimbangan kelas (di mana jumlah **Not Anemic** jauh lebih besar), akurasi bisa memberikan gambaran yang menyesatkan. Oleh karena itu, penting untuk melihat metrik lain seperti precision dan recall.
+  Di mana **True Positives (TP)** adalah jumlah individu yang benar-benar menderita anemia dan diprediksi menderita anemia, sedangkan **True Negatives (TN)** adalah jumlah individu yang tidak menderita anemia dan diprediksi tidak menderita anemia. Akurasi yang tinggi menunjukkan bahwa model berhasil memprediksi dengan benar sebagian besar data, namun dalam kasus ketidakseimbangan kelas (di mana jumlah **Not Anemic** jauh lebih besar), akurasi bisa memberikan gambaran yang menyesatkan. Oleh karena itu, penting untuk melihat metrik lain seperti precision dan recall.
 
 **2. Precision**
 
@@ -352,9 +355,7 @@ Pada tahap ini, metrik evaluasi yang digunakan untuk mengukur performa model mel
   \text{Precision} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Positives}}
   $$
 
-  Precision tinggi menunjukkan bahwa model sangat berhati-hati dalam mengklasifikasikan individu sebagai menderita anemia dan memiliki lebih sedikit kesalahan klasifikasi (false positives).
-
-  Precision yang tinggi berarti model dapat mengidentifikasi individu yang benar-benar menderita anemia dengan baik, menghindari prediksi yang salah terhadap individu yang sehat. Ini sangat penting ketika tujuan adalah meminimalkan **false positives**, misalnya, untuk menghindari pemberian diagnosis yang salah.
+  Precision tinggi menunjukkan bahwa model sangat berhati-hati dalam mengklasifikasikan individu sebagai menderita anemia dan memiliki lebih sedikit kesalahan klasifikasi (false positives). Precision yang tinggi berarti model dapat mengidentifikasi individu yang benar-benar menderita anemia dengan baik, menghindari prediksi yang salah terhadap individu yang sehat. Ini sangat penting ketika tujuan adalah meminimalkan **false positives**, misalnya, untuk menghindari pemberian diagnosis yang salah.
 
 #### 3. **Recall**
 
@@ -364,9 +365,7 @@ Pada tahap ini, metrik evaluasi yang digunakan untuk mengukur performa model mel
   \text{Recall} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Negatives}}
   $$
 
-  Recall tinggi menunjukkan bahwa model berhasil menangkap sebagian besar individu yang benar-benar menderita anemia, meskipun mungkin ada beberapa kesalahan (false negatives).
-
-  Recall yang tinggi sangat diinginkan dalam kasus diagnosis medis, karena **lebih penting** untuk **menangkap semua pasien yang menderita anemia** (mencegah **false negatives**) daripada menghindari beberapa **false positives**.
+  Recall tinggi menunjukkan bahwa model berhasil menangkap sebagian besar individu yang benar-benar menderita anemia, meskipun mungkin ada beberapa kesalahan (false negatives). Recall yang tinggi sangat diinginkan dalam kasus diagnosis medis, karena **lebih penting** untuk **menangkap semua pasien yang menderita anemia** (mencegah **false negatives**) daripada menghindari beberapa **false positives**.
 
 #### 4. **F1-Score**
 
@@ -376,9 +375,7 @@ Pada tahap ini, metrik evaluasi yang digunakan untuk mengukur performa model mel
   \text{F1-Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
   $$
 
-  F1-Score yang tinggi menunjukkan bahwa model memberikan keseimbangan yang baik antara ketepatan prediksi dan kemampuan untuk mendeteksi semua kasus positif.
-
-  F1-Score yang baik menunjukkan bahwa model tidak hanya akurat dalam memprediksi anemia tetapi juga berhasil mendeteksi sebagian besar individu yang benar-benar menderita anemia, yang sangat penting dalam konteks kesehatan.
+  F1-Score yang tinggi menunjukkan bahwa model memberikan keseimbangan yang baik antara ketepatan prediksi dan kemampuan untuk mendeteksi semua kasus positif. F1-Score yang baik menunjukkan bahwa model tidak hanya akurat dalam memprediksi anemia tetapi juga berhasil mendeteksi sebagian besar individu yang benar-benar menderita anemia, yang sangat penting dalam konteks kesehatan.
 
 ### Hasil Proyek Berdasarkan Metrik Evaluasi
 Setelah melakukan pelatihan dan evaluasi model menggunakan **cross-validation**, hasil yang didapatkan menunjukkan performa model yang beragam tergantung pada algoritma yang digunakan. Terlihat bahwa performa model setelah dilakukan hyperparameter tuning memberikan hasil yang sedikit lebih baik dari sebelum melakukan hyperparameter tuning. 
