@@ -66,7 +66,7 @@ Semua kolom bertipe data numerik dengan 4 fitur bertipe data float64 (Hemoglobin
 
 Berdasarkan pengecekan deskripsi statistik, kolom Gender dan Result memiliki distribusi yang cukup seimbang, sementara kolom numerik seperti Hemoglobin, MCH, MCHC, dan MCV menunjukkan variasi yang cukup besar. Variasi yang besar pada kolom Hemoglobin, MCH, MCHC, dan MCV adalah hal yang wajar, mengingat perbedaan kondisi antara individu yang menderita anemia dan yang tidak.
 
-**Pengecekan Missing Value**
+### Pengecekan Missing Value
 
   Langkah pertama adalah memeriksa apakah ada data yang hilang (missing values) pada setiap fitur. Jika ada nilai yang hilang pada fitur penting, imputasi dilakukan menggunakan median atau mean (untuk fitur numerik). Jika jumlahnya sangat sedikit, baris yang memiliki missing values dapat dihapus tanpa mempengaruhi kualitas dataset. Penanganan missing values diperlukan karena data yang hilang dapat mengurangi kualitas model dan menyebabkan bias dalam prediksi. Dengan imputasi atau penghapusan missing values, dataset menjadi lebih konsisten dan memungkinkan model untuk belajar dengan lebih baik.
     
@@ -79,7 +79,7 @@ Berdasarkan pengecekan deskripsi statistik, kolom Gender dan Result memiliki dis
 
   Namun, dalam dataset ini, saat dilakukan pengecekan tidak terdapat missing value sehingga tidak diperlukan penanganan missing value.
   
-**Pengecekan Data Duplikat**
+### Pengecekan Data Duplikat
 
   Langkah selanjutnya adalah memeriksa apakah ada data duplikat di dalam dataset. Data duplikat dapat terjadi akibat kesalahan saat pengumpulan atau proses input data.
 
@@ -91,17 +91,16 @@ Berdasarkan pengecekan deskripsi statistik, kolom Gender dan Result memiliki dis
   ```
   Pada dataset ini, ditemukan 887 baris duplikat.
   
-**Penanganan Outlier**
+### Penanganan Outlier
 
   Untuk mendeteksi outlier atau nilai ekstrem, teknik boxplot dan IQR digunakan untuk mengidentifikasi data yang berada di luar batas normal distribusi. Penananganan outlier diperlukan karena outlier yang tidak sesuai dengan pola data dapat mengganggu model, menghasilkan prediksi yang tidak akurat, dan menyebabkan overfitting. 
 
   ![Outlier](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/outlier.png)
 
-  Pada dataset ini tidak ditemukan outlier.
-  
+  Berdasarkan hasil dari perhitungan outlier menggunakan metode Interquartile Range (IQR), hanya ada satu outlier pada kadar hemoglobin, dan kadar hemoglobin memang bervariasi antar individu, terutama dalam konteks mendeteksi anemia. Mengingat bahwa kadar hemoglobin yang ekstrem dapat mencerminkan kondisi medis tertentu, mempertahankan outlier tersebut sangat penting karena dapat memberikan informasi diagnostik yang berharga dan membantu model dalam mendeteksi kondisi medis yang jarang terjadi.
 
-### Exploratory Data Analysis
-**Univariate Analysis**
+## Exploratory Data Analysis
+### Univariate Analysis
 - **Analisis Distribusi Data Kategorikal**
   
   ![Analisis Distribusi Kategorikal Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/analisis_distribusi_kategorikal.png)
@@ -113,13 +112,13 @@ Berdasarkan pengecekan deskripsi statistik, kolom Gender dan Result memiliki dis
 
   Berdasarkan analisis distribusi histogram, distribusi Hemoglobin cenderung terdistribusi dengan kemiringan ke kiri (skewed), dengan sebagian besar individu memiliki nilai normal antara 12 hingga 16 g/dL, namun ada juga beberapa individu dengan kadar yang sangat rendah, yang menunjukkan potensi anemia. Sementara MCH, MCHC, dan MCV memiliki variasi yang lebih terdistribusi merata. MCH memiliki distribusi yang lebih merata dengan puncak di kisaran 22-26, sementara MCHC lebih terkonsentrasi pada nilai antara 28-32. MCV menunjukkan variasi yang lebih luas, terutama di kisaran 70 hingga 100. 
 
-**Bivariate Analysis**
+### Bivariate Analysis
   
   ![Analisis Distribusi BoxPlot](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/analisis_distribusi_fitur.png)
 
   Pada boxplot berikut, distribusi MCH antara individu yang menderita anemia dan yang tidak menderita anemia terlihat cukup serupa. Meskipun ada sedikit perbedaan, variabilitas MCH pada kedua kelompok ini hampir sama. Terlihat juga bahwa individu yang tidak menderita anemia memiliki nilai MCV yang sedikit lebih tinggi dibandingkan mereka yang menderita anemia. Distribusi MCHC antara individu dengan dan tanpa anemia cukup mirip, namun ada sedikit perbedaan. Fitur-fitur seperti MCH, MCV, dan MCHC menunjukkan sedikit perbedaan antara kelompok Anemic dan Not Anemic. Ini menunjukkan bahwa meskipun fitur ini penting, perbedaan yang lebih besar mungkin ada di fitur lainnya seperti Hemoglobin. Dapat dilihat bahwa individu yang terkena anemia memiliki kadar hemoglobin lebih rendah dibandingkan dengan individu yang tidak terkena anemia. 
 
-**Multivarate Analysis**
+### Multivarate Analysis
 - **Analisis Distribusi**
   
   ![Analisis Distribusi BoxPlot](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/analisis_distribusi_gender_result_hemoglobin.png)
