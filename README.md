@@ -2,31 +2,33 @@
 
 ## Domain Proyek
 ![Anemia Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/anemia.jpg)
-Anemia adalah gangguan kesehatan yang umum di seluruh dunia, yang ditandai dengan penurunan jumlah sel darah merah atau kadar hemoglobin dalam darah. Kondisi ini dapat menyebabkan berkurangnya kemampuan darah untuk mengangkut oksigen ke seluruh tubuh, yang berpotensi mengurangi kualitas hidup dan meningkatkan risiko komplikasi medis serius, seperti penyakit jantung.  Kondisi ini sering kali disebabkan oleh kekurangan zat besi, defisiensi vitamin B12, atau masalah kesehatan lainnya. Berdasarkan data terbaru dari Organisasi Kesehatan Dunia (WHO), pada tahun 2023, sekitar 30,7% wanita usia 15–49 tahun mengalami anemia, dengan 35,5% di antaranya adalah wanita hamil. Selain itu, pada tahun 2019, prevalensi anemia pada anak-anak usia 6–59 bulan mencapai 39,8% secara global[[1]](https://www.who.int/data/gho/data/themes/topics/anaemia_in_women_and_children). Penyakit anemia biasanya terdeteksi melalui pemeriksaan medis yang memerlukan tes laboratorium untuk mengukur berbagai parameter darah, seperti kadar hemoglobin dan jumlah sel darah merah. Namun, prosedur ini dapat memakan waktu dan biaya. Selain itu, diagnosis sering kali terlambat, yang mengarah pada keterlambatan pengobatan dan peningkatan risiko komplikasi. 
+Anemia adalah gangguan kesehatan yang umum di seluruh dunia, yang ditandai dengan penurunan jumlah sel darah merah atau kadar hemoglobin dalam darah. Kondisi ini dapat menyebabkan berkurangnya kemampuan darah untuk mengangkut oksigen ke seluruh tubuh, yang berpotensi mengurangi kualitas hidup dan meningkatkan risiko komplikasi medis serius, seperti penyakit jantung.  Kondisi ini sering kali disebabkan oleh kekurangan zat besi, defisiensi vitamin B12, atau masalah kesehatan lainnya. Berdasarkan data terbaru dari Organisasi Kesehatan Dunia (WHO), pada tahun 2023, sekitar 30,7% wanita usia 15–49 tahun mengalami anemia, dengan 35,5% di antaranya adalah wanita hamil. Selain itu, pada tahun 2019, prevalensi anemia pada anak-anak usia 6–59 bulan mencapai 39,8% secara global[[1]](https://www.who.int/data/gho/data/themes/topics/anaemia_in_women_and_children). 
 
-Masalah ini dapat diselesaikan dengan menerapkan machine learning dalam bentuk model prediktif untuk mendiagnosis anemia lebih cepat dan lebih akurat. Dengan memanfaatkan data medis seperti jumlah sel darah merah, kadar hemoglobin, dan ukuran rata-rata sel darah merah (MCV), model machine learning dapat memberikan diagnosis dini yang lebih efisien [[2]](https://www.researchgate.net/publication/368845592_PREDICTION_OF_ANEMIA_USING_MACHINE_LEARNING_ALGORITHMS). Proyek ini menggunakan algoritma klasifikasi untuk menganalisis pola dalam data pasien dan memprediksi kemungkinan seseorang menderita anemia. Hal ini tidak hanya mempercepat proses diagnosis tetapi juga memungkinkan intervensi lebih cepat, yang dapat mencegah komplikasi lebih lanjut. 
+Penyakit anemia biasanya terdeteksi melalui pemeriksaan medis yang memerlukan tes laboratorium untuk mengukur berbagai parameter darah, seperti kadar hemoglobin dan jumlah sel darah merah. Namun, prosedur ini dapat memakan waktu dan biaya. Selain itu, diagnosis sering kali terlambat, yang mengarah pada keterlambatan pengobatan dan peningkatan risiko komplikasi. Oleh karena itu, diperlukan cara yang cepat dan efisien agar proses diagnosis anemia menjadi lebih cepat dan pengobatan dapat dilakukan segera.
 
-Dengan penggunaan machine learning dalam analisis prediktif, kita dapat memanfaatkan data yang sudah ada untuk memberikan prediksi yang lebih presisi, lebih cepat, dan lebih terjangkau, yang pada gilirannya dapat memperbaiki manajemen kesehatan masyarakat. Ini juga memungkinkan tenaga medis untuk mengidentifikasi pasien yang membutuhkan perhatian segera, tanpa harus menunggu hasil tes laboratorium yang memakan waktu. Dengan demikian, proyek ini bertujuan untuk mengatasi masalah keterlambatan diagnosis dan akses terbatas ke fasilitas medis, yang dapat diselesaikan dengan solusi berbasis teknologi yang efisien dan lebih mudah diakses.
+Masalah ini dapat diselesaikan dengan menerapkan machine learning dalam bentuk model prediktif untuk mendiagnosis anemia lebih cepat dan lebih akurat. Dengan memanfaatkan data medis seperti jumlah sel darah merah, kadar hemoglobin, MCV (Mean Corpuscular Volume), MCH (Mean Corpuscular Hemoglobin), dan MCHC (Mean Corpuscular Hemoglobin Concentration), model machine learning dapat memberikan diagnosis dini yang lebih efisien [[2]](https://www.researchgate.net/publication/368845592_PREDICTION_OF_ANEMIA_USING_MACHINE_LEARNING_ALGORITHMS). Proyek ini menggunakan algoritma klasifikasi untuk menganalisis pola dalam data pasien dan memprediksi kemungkinan seseorang menderita anemia. Hal ini tidak hanya mempercepat proses diagnosis tetapi juga memungkinkan tindakan pengobatan lebih cepat, yang dapat mencegah komplikasi lebih lanjut. 
+
+Dengan penggunaan machine learning dalam analisis prediktif, kita dapat memanfaatkan data yang sudah ada untuk memberikan prediksi yang lebih presisi, lebih cepat, dan lebih terjangkau, yang pada gilirannya dapat memperbaiki manajemen kesehatan masyarakat. Ini juga memungkinkan tenaga medis untuk mengidentifikasi pasien yang membutuhkan perhatian segera, tanpa harus menunggu hasil tes laboratorium yang memakan waktu. Dengan demikian, proyek ini bertujuan untuk mengatasi masalah keterlambatan diagnosis yang dapat diselesaikan dengan solusi berbasis teknologi yang efisien dan lebih mudah diakses.
 
 ## Business Understanding
 
 ### Problem Statements
 Berdasarkan uraian yang telah dipaparkan pada latar belakang diatas, maka dapat diambil sebuah rumusan masalah yang dirumuskan sebagai berikut:
 - Bagaimana cara memprediksi apakah seseorang menderita anemia hanya dengan menggunakan data medis dasar seperti kadar hemoglobin, MCV (Mean Corpuscular Volume), MCH (Mean Corpuscular Hemoglobin), dan MCHC (Mean Corpuscular Hemoglobin Concentration), tanpa memerlukan tes laboratorium yang mahal dan memakan waktu?
-- Bagaimana meningkatkan akurasi model prediktif untuk mendeteksi anemia dengan menggunakan berbagai algoritma machine learning, serta melakukan optimasi model untuk mendapatkan hasil yang lebih baik?
-- Bagaimana cara membandingkan performa beberapa algoritma machine learning yang berbeda dalam mendeteksi anemia, dan memilih model terbaik berdasarkan metrik evaluasi yang relevan?
+- Dari serangkaian fitur yang ada, fitur apa yang paling berpengaruh untuk mendeteksi anemia?
+- Bagaimana meningkatkan kinerja model prediktif untuk mendeteksi anemia?
 
 ### Goals
 Berdasarkan rumusan masalah yang telah dipaparkan di atas, maka proyek penelitian ini memiliki tujuan, yaitu:
 - Membangun model prediksi berbasis machine learning yang dapat memberikan diagnosis dini anemia dengan data medis dasar, seperti jumlah sel darah merah, kadar hemoglobin, MCV, MCH, dan MCHC.
-- Meningkatkan kinerja model prediktif dengan menggunakan beberapa algoritma machine learning, seperti Logistic Regression, Decision Trees, dan Random Forest, serta melakukan hyperparameter tuning untuk memperoleh hasil yang lebih optimal.
-- Menerapkan metrik evaluasi yang tepat, seperti akurasi, precision, recall, dan F1-score, untuk memilih model terbaik yang memberikan keseimbangan optimal antara prediksi yang akurat dan kemampuan untuk mendeteksi kasus anemia secara efektif.
+- Mengetahui fitur yang paling berpengaruh untuk mendeteksi anemia.
+- Meningkatkan kinerja model prediktif dengan menggunakan hyperparameter tuning untuk memperoleh hasil yang lebih optimal.
 
 ### Solution statements
 Berdasarkan tujuan yang telah dipaparkan diatas, maka proyek penelitian ini memiliki solusi atau tahapan sebagai berikut:
-- Menggunakan beberapa algoritma machine learning, seperti Logistic Regression, Decision Trees, dan Random Forest, untuk membangun model klasifikasi anemia yang dapat memprediksi status anemia berdasarkan data medis yang ada, termasuk MCV, MCH, dan MCHC.
-- Menerapkan hyperparameter tuning dengan menggunakan teknik Grid Search untuk memilih parameter terbaik pada masing-masing algoritma dan meningkatkan kinerja model.
-- Membandingkan performa model dengan menggunakan metrik evaluasi seperti akurasi, precision, recall, dan F1-score, dan memilih model terbaik yang memberikan keseimbangan optimal antara kemampuan memprediksi status anemia secara akurat dan deteksi yang efektif.
+- Menggunakan beberapa algoritma machine learning, seperti Logistic Regression, Decision Trees, Random Forest, dan K-Nearest Neighbors untuk membangun model klasifikasi anemia yang dapat memprediksi status anemia berdasarkan data medis yang ada dan akan dipilih satu model dengan kinerja model terbaik.
+- Melakukan eksplorasi data awal (Exploratory Data Analysis, EDA) untuk menganalisis korelasi antar fitur, mengidentifikasi hubungan antara variabel medis dengan status anemia, dan menentukan fitur yang memiliki kontribusi signifikan dalam mendeteksi anemia.
+- Menerapkan hyperparameter tuning dengan menggunakan teknik Grid Search untuk memilih kombinasi parameter terbaik pada masing-masing algoritma dan meningkatkan kinerja model.
 
 ## Data Understanding
 
@@ -56,7 +58,12 @@ Dataset yang digunakan dalam proyek ini adalah [Anemia Dataset](https://www.kagg
 - MCH : *Mean Corpuscular Hemoglobin* merupakan jumlah rata-rata hemoglobin di dalam satu sel darah merah.
 - MCHC : *Mean Corpuscular Hemoglobin Concentration* merupakan konsentrasi rata-rata hemoglobin dalam satu sel darah merah.
 - MCV : *Mean Corpuscular Volume* merupakan volume rata-rata sel darah merah.
-- Results : merupakan label yang menunjukkan individu menderita anemia atau tidak (0 = Tidak anemia, 1 = Anemia)
+- Results : merupakan label yang menunjukkan individu menderita anemia atau tidak (0 = Tidak anemia, 1 = Anemia), result adalah fitur target.
+Semua kolom bertipe data numerik dengan 4 fitur bertipe data float64(Hemoglobin, MCH, MCHC, dan MCV) dan 2 fitur bertipe data int64 (Gender dan Result). Uraian di atas menunjukkan bahwa setiap kolom telah memiliki tipe data yang sesuai dan dikarenakan semua fitur adalah numerik, maka tidak diperlukan encoding untuk pelatihan. Namun, pada saat EDA kolom Result dan Gender akan diubah sementara ke bentuk kategorikal untuk mempermudah proses EDA yang kemudian akan dikembalikan ke bentuk semula.
+
+![Deskripsi Statistik Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/deskripsi_statistik.png)
+
+Berdasarkan pengecekan deskripsi statistik, kolom Gender dan Result memiliki distribusi yang cukup seimbang, sementara kolom numerik seperti Hemoglobin, MCH, MCHC, dan MCV menunjukkan variasi yang cukup besar. Variasi yang besar pada kolom Hemoglobin, MCH, MCHC, dan MCV adalah hal yang wajar, mengingat perbedaan kondisi antara individu yang menderita anemia dan yang tidak.
 
 ### Exploratory Data Analysis
 - **Analisis Distribusi Data Kategorikal**
