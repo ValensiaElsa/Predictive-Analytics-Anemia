@@ -66,8 +66,7 @@ Semua kolom bertipe data numerik dengan 4 fitur bertipe data float64 (Hemoglobin
 
 Berdasarkan pengecekan deskripsi statistik, kolom Gender dan Result memiliki distribusi yang cukup seimbang, sementara kolom numerik seperti Hemoglobin, MCH, MCHC, dan MCV menunjukkan variasi yang cukup besar. Variasi yang besar pada kolom Hemoglobin, MCH, MCHC, dan MCV adalah hal yang wajar, mengingat perbedaan kondisi antara individu yang menderita anemia dan yang tidak.
 
-### Exploratory Data Analysis
-**Penanganan Missing Value**
+**Pengecekan Missing Value**
 
   Langkah pertama adalah memeriksa apakah ada data yang hilang (missing values) pada setiap fitur. Jika ada nilai yang hilang pada fitur penting, imputasi dilakukan menggunakan median atau mean (untuk fitur numerik). Jika jumlahnya sangat sedikit, baris yang memiliki missing values dapat dihapus tanpa mempengaruhi kualitas dataset. Penanganan missing values diperlukan karena data yang hilang dapat mengurangi kualitas model dan menyebabkan bias dalam prediksi. Dengan imputasi atau penghapusan missing values, dataset menjadi lebih konsisten dan memungkinkan model untuk belajar dengan lebih baik.
     
@@ -80,20 +79,17 @@ Berdasarkan pengecekan deskripsi statistik, kolom Gender dan Result memiliki dis
 
   Namun, dalam dataset ini, saat dilakukan pengecekan tidak terdapat missing value sehingga tidak diperlukan penanganan missing value.
   
-**Penghapusan Data Duplikat**
+**Pengecekan Data Duplikat**
 
-  Langkah selanjutnya adalah memeriksa apakah ada data duplikat di dalam dataset. Data duplikat dapat terjadi akibat kesalahan saat pengumpulan atau proses input data. Baris-baris yang memiliki nilai identik di seluruh fitur akan diperiksa dan dihapus jika ditemukan. Data duplikat harus dihapus karena dapat menyebabkan model memberikan bobot berlebih pada informasi yang sama, yang dapat mengarah pada overfitting atau kesalahan dalam pelatihan model. Penghapusan data duplikat memastikan bahwa model hanya belajar dari data yang unik dan relevan. 
+  Langkah selanjutnya adalah memeriksa apakah ada data duplikat di dalam dataset. Data duplikat dapat terjadi akibat kesalahan saat pengumpulan atau proses input data.
 
-  Untuk pengecekan dan penghapusan data duplikat, kode berikut digunakan:
+  Untuk pengecekan data duplikat, kode berikut digunakan:
   ```python
   # Memeriksa duplikasi data
   jumlah_duplikat = df.duplicated().sum()
     print(f"Jumlah baris duplikat: {jumlah_duplikat}")
-
-  # Menghapus baris duplikat
-  df = df.drop_duplicates()
   ```
-  Pada dataset ini, ditemukan 887 baris duplikat yang kemudian dihapus. Sisa data setelah pembersihan baris duplikat adalah 534. Data yang terduplikasi memang cukup banyak, tetapi sisa data yang bersih sebanyak 534 (di atas 500) masih bisa untuk digunakan.
+  Pada dataset ini, ditemukan 887 baris duplikat.
   
 **Penanganan Outlier**
 
@@ -103,6 +99,8 @@ Berdasarkan pengecekan deskripsi statistik, kolom Gender dan Result memiliki dis
 
   Pada dataset ini tidak ditemukan outlier.
   
+
+### Exploratory Data Analysis
 **Univariate Analysis**
 - **Analisis Distribusi Data Kategorikal**
   
@@ -137,6 +135,17 @@ Berdasarkan pengecekan deskripsi statistik, kolom Gender dan Result memiliki dis
 
 ## Data Preparation
 Fitur pada Dataset Anemia sudah berbentuk numerik semua sehingga tidak perlu dilakukan Encoding. Preprocessing yang dilakukan adalah sebagai berikut:
+- **Penghapusan Data Duplikat**
+
+  Data duplikat dapat terjadi akibat kesalahan saat pengumpulan atau proses input data. Baris-baris yang memiliki nilai identik di seluruh fitur akan diperiksa dan dihapus jika ditemukan. Data duplikat harus dihapus karena dapat menyebabkan model memberikan bobot berlebih pada informasi yang sama, yang dapat mengarah pada overfitting atau kesalahan dalam pelatihan model. Penghapusan data duplikat memastikan bahwa model hanya belajar dari data yang unik dan relevan.
+  
+ Untuk penghapusan data duplikat, kode berikut digunakan:
+  ```python
+  # Menghapus baris duplikat
+  df = df.drop_duplicates()
+  ```
+
+  Sisa data setelah pembersihan baris duplikat adalah 534. Data yang terduplikasi memang cukup banyak, tetapi sisa data yang bersih sebanyak 534 (di atas 500) masih bisa untuk digunakan.
 - **Data Splitting**
 
   Dataset akan dibagi menjadi dua bagian, yaitu data training dan testing (proporsi 80:20). Data training akan digunakan untuk melatih model, sedangkan data testing akan digunakan untuk mengevaluasi kinerja model yang sudah dibangun. Pemisahan data ini penting untuk menghindari overfitting dan memastikan model dapat diuji pada data yang tidak digunakan selama proses pelatihan. Kita harus membagi data agar proses transformasi hanya dilakukan pada data latih saja. Data uji harus berperan sebagai data baru yang tidak terpengaruh oleh proses pelatihan, untuk menilai bagaimana model bekerja pada data yang belum pernah dilihat sebelumnya.
