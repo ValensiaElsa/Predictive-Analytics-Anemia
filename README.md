@@ -59,6 +59,7 @@ Dataset yang digunakan dalam proyek ini adalah [Anemia Dataset](https://www.kagg
 - MCHC : *Mean Corpuscular Hemoglobin Concentration* merupakan konsentrasi rata-rata hemoglobin dalam satu sel darah merah.
 - MCV : *Mean Corpuscular Volume* merupakan volume rata-rata sel darah merah.
 - Results : merupakan label yang menunjukkan individu menderita anemia atau tidak (0 = Tidak anemia, 1 = Anemia), result adalah fitur target.
+
 Semua kolom bertipe data numerik dengan 4 fitur bertipe data float64(Hemoglobin, MCH, MCHC, dan MCV) dan 2 fitur bertipe data int64 (Gender dan Result). Uraian di atas menunjukkan bahwa setiap kolom telah memiliki tipe data yang sesuai dan dikarenakan semua fitur adalah numerik, maka tidak diperlukan encoding untuk pelatihan. Namun, pada saat EDA kolom Result dan Gender akan diubah sementara ke bentuk kategorikal untuk mempermudah proses EDA yang kemudian akan dikembalikan ke bentuk semula.
 
 ![Deskripsi Statistik Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/deskripsi_statistik.png)
@@ -170,7 +171,13 @@ Berikut adalah penjelasan dari model yang akan digunakan:
 ### 1. **Random Forest (RF)**
 ![RF Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/random_forest.jpg)
 
-**Random Forest** adalah algoritma ensemble yang menggunakan banyak pohon keputusan untuk membuat prediksi. Setiap pohon dalam hutan dilatih menggunakan subset data yang berbeda, dan hasilnya digabungkan untuk meningkatkan akurasi model secara keseluruhan.
+**Random Forest** adalah algoritma ensemble yang menggunakan banyak pohon keputusan untuk membuat prediksi. Setiap pohon dalam hutan dilatih menggunakan subset data yang berbeda, dan hasilnya digabungkan untuk meningkatkan akurasi model secara keseluruhan. 
+
+Berikut adalah kode pelatihan model.
+
+```python
+rf = RandomForestClassifier().fit(X_train_scaled, y_train_resampled)
+```
 
 **Tahapan:**
 
@@ -199,6 +206,12 @@ Berikut adalah penjelasan dari model yang akan digunakan:
 
 **Decision Tree** adalah algoritma yang membangun model dalam bentuk pohon keputusan untuk klasifikasi dan regresi. Setiap simpul pada pohon mewakili fitur, dan cabang mewakili keputusan berdasarkan nilai fitur tersebut.
 
+Berikut adalah kode pelatihan model.
+
+```python
+dt = DecisionTreeClassifier().fit(X_train_scaled, y_train_resampled)
+```
+
 **Tahapan:**
 
 **Decision Tree** adalah algoritma pembelajaran yang membangun model berbentuk pohon keputusan untuk memprediksi hasil berdasarkan fitur-fitur input. Proses dimulai dengan **memilih fitur yang membagi dataset terbaik**, yaitu fitur yang dapat memisahkan data secara optimal berdasarkan kriteria tertentu, seperti **Gini Impurity** atau **Entropy**. Pembagian ini dilakukan berulang kali pada setiap node, sehingga dataset terpecah menjadi subset yang lebih homogen. Setelah memilih fitur terbaik untuk membagi data, pohon keputusan **dibangun secara rekursif**, membagi dataset lebih lanjut pada setiap cabang pohon hingga **batas kedalaman pohon tercapai** atau hingga tidak ada pembagian yang lebih baik yang dapat dilakukan. Proses ini berlanjut hingga model mencapai titik di mana pembagian lebih lanjut tidak memberikan manfaat atau mencapai kriteria penghentian lainnya, seperti jumlah minimum sampel di setiap node atau kedalaman maksimum pohon yang diinginkan [[4]](https://scikit-learn.org/stable/modules/tree.html).
@@ -224,7 +237,13 @@ Berikut adalah penjelasan dari model yang akan digunakan:
 ### 3. **Logistic Regression (LR)**
 ![LR Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/logistic_regression.png)
 
-**Logistic Regression** adalah model linier yang digunakan untuk klasifikasi biner. Model ini memodelkan probabilitas dari kelas target menggunakan fungsi logistik.
+**Logistic Regression** adalah model linier yang digunakan untuk klasifikasi biner. Model ini memodelkan probabilitas dari kelas target menggunakan fungsi logistik. 
+
+Berikut adalah kode pelatihan model.
+
+```python
+lr = LogisticRegression().fit(X_train_scaled, y_train_resampled)
+```
 
 **Tahapan:**
 
@@ -251,6 +270,12 @@ Berikut adalah penjelasan dari model yang akan digunakan:
 ![KNN Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/knn.png)
 
 **K-Nearest Neighbors (KNN)** adalah algoritma non-parametrik yang mengklasifikasikan data berdasarkan mayoritas kelas dari **k** tetangga terdekatnya. Metrik jarak, seperti **Euclidean**, digunakan untuk menemukan tetangga terdekat.
+
+Berikut adalah kode pelatihan model.
+
+```python
+knn = KNeighborsClassifier().fit(X_train_scaled, y_train_resampled)
+```
 
 **Tahapan:**
 
@@ -358,11 +383,53 @@ Pada tahap ini, metrik evaluasi yang digunakan untuk mengukur performa model mel
 ### Hasil Proyek Berdasarkan Metrik Evaluasi
 Setelah melakukan pelatihan dan evaluasi model menggunakan **cross-validation**, hasil yang didapatkan menunjukkan performa model yang beragam tergantung pada algoritma yang digunakan. Terlihat bahwa performa model setelah dilakukan hyperparameter tuning memberikan hasil yang sedikit lebih baik dari sebelum melakukan hyperparameter tuning. 
 
+![Perbandingan Evaluasi Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/perbandingan_evaluasi.png)
 
+Berikut adalah ringkasan metrik evaluasi untuk model yang diuji **sebelum dilakukan hyperparameter tuning**:
 
-Berikut adalah ringkasan metrik evaluasi untuk model yang diuji setelah dilakukan hyperparameter tuning:
+![Evaluasi Before Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/evaluasi_before.png)
 
-  ![Evaluasi Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/evaluasi.png)
+- **Random Forest (RF)**:
+
+  * **Akurasi**: 99.07%
+  * **Precision**: 99.08%
+  * **Recall**: 99.07%
+  * **F1-Score**: 99.07%
+
+  Random Forest memberikan hasil yang sangat baik dalam mendeteksi anemia, dengan akurasi dan recall yang tinggi. Model ini berhasil mendeteksi sebagian besar individu yang menderita anemia, sambil mempertahankan tingkat kesalahan prediksi yang rendah.
+
+- **Decision Tree (DT)**:
+
+  * **Akurasi**: 97.20%
+  * **Precision**: 97.36%
+  * **Recall**: 97.20%
+  * **F1-Score**: 97.20%
+
+    Menunjukkan bahwa model ini masih memberikan performa yang sangat baik, meskipun sedikit lebih rendah dibandingkan dengan Random Forest. Precision yang tinggi menunjukkan bahwa sebagian besar prediksi positifnya benar, namun Recall yang sedikit lebih rendah menunjukkan bahwa model ini sedikit lebih sering melewatkan individu dengan anemia
+
+- **Logistic Regression (LR)**:
+
+  * **Akurasi**: 96.26%
+  * **Precision**: 96.54%
+  * **Recall**: 96.26%
+  * **F1-Score**: 96.27%
+  
+  Meskipun tidak sebaik Random Forest atau Decision Tree, model ini tetap mampu mengklasifikasikan data dengan baik, terutama dalam hal Precision dan Recall yang seimbang. Namun, Recall yang lebih rendah menunjukkan bahwa model ini lebih sering melewatkan individu yang menderita anemia dibandingkan dengan model lainnya
+  
+- **K-Nearest Neighbors (KNN)**:
+
+  * **Akurasi**: 90.65%
+  * **Precision**: 91.69%
+  * **Recall**: 90.65%
+  * **F1-Score**: 90.66%
+    
+   Meskipun memiliki Precision dan Recall yang seimbang, KNN lebih sering melewatkan individu yang menderita anemia dan memiliki Accuracy yang jauh lebih rendah dibandingkan model lainnya.
+
+Secara keseluruhan, **Random Forest** menjadi model yang paling unggul dalam hal akurasi, recall, dan keseimbangan metrik evaluasi, diikuti oleh **Decision Tree**, **Logistic Regression**, dan **K-Nearest Neighbors**. Model ini memberikan wawasan mengenai fitur yang paling relevan dan memberikan hasil yang optimal pada dataset yang diuji.
+
+Berikut adalah ringkasan metrik evaluasi untuk model yang diuji **setelah dilakukan hyperparameter tuning**:
+
+  ![Evaluasi After Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/evaluasi_after.png)
 
 - **Random Forest (RF)**:
 
@@ -399,18 +466,20 @@ Berikut adalah ringkasan metrik evaluasi untuk model yang diuji setelah dilakuka
   * **F1-Score**: 90.65%
     
   KNN memberikan hasil Precision dan Recall yang seimbang. Namun, KNN menunjukkan hasil yang lebih rendah dibandingkan dengan model lainnya, yang mengindikasikan bahwa KNN tidak optimal untuk dataset ini dan cenderung lebih sering melewatkan individu dengan anemia.
-  
+
+Secara keseluruhan, **Random Forest** tetap menjadi model yang paling disarankan setelah tuning dengan nilai Recall yang sangat tinggi dan metrik evaluasi lainnya yang juga tinggi, diikuti oleh Decision Tree, dengan Logistic Regression dan KNN lebih cocok digunakan dalam skenario yang lebih sederhana.
+
 ### Model Terbaik Berdasarkan Metrik Evaluasi
 
-**Recall** yang tinggi sangat diinginkan dalam kasus diagnosis medis, karena **lebih penting** untuk **menangkap semua pasien yang menderita anemia** (mencegah **false negatives**) daripada menghindari beberapa **false positives**. Dalam konteks ini, **false negatives** (pasien yang seharusnya didiagnosis anemia tetapi tidak terdeteksi) dapat berakibat fatal karena pasien tersebut tidak menerima perawatan yang diperlukan. Oleh karena itu, model dengan **Recall** yang lebih tinggi, seperti **Random Forest**, sangat diutamakan untuk memastikan bahwa sebanyak mungkin individu yang menderita anemia dapat terdeteksi dan diberi penanganan yang tepat. Selain itu, model Random Forest juga memberikan hasil metrik evaluasi yang sangat tinggi. Meskipun Decission Tree juga memberikan hasil evaluasi yang sama, tetapi Random Forest sedikit lebih unggul karena kemampuannya dalam mengurangi overfitting melalui teknik ensemble sehingga Random Forest dipilih menjadi model terbaik.
+**Recall** yang tinggi sangat diinginkan dalam kasus diagnosis medis, karena **lebih penting** untuk **menangkap semua pasien yang menderita anemia** (mencegah **false negatives**) daripada menghindari beberapa **false positives**. Dalam konteks ini, **false negatives** (pasien yang seharusnya didiagnosis anemia tetapi tidak terdeteksi) dapat berakibat fatal karena pasien tersebut tidak menerima perawatan yang diperlukan. Oleh karena itu, model dengan **Recall** yang lebih tinggi, seperti **Random Forest**, sangat diutamakan untuk memastikan bahwa sebanyak mungkin individu yang menderita anemia dapat terdeteksi dan diberi penanganan yang tepat. Selain itu, model **Random Forest** juga memberikan hasil metrik evaluasi yang sangat tinggi. Meskipun Decission Tree juga memberikan hasil evaluasi yang sama, tetapi Random Forest sedikit lebih unggul karena kemampuannya dalam mengurangi overfitting melalui teknik ensemble sehingga Random Forest dipilih menjadi model terbaik.
 
 ### **Evaluasi Terhadap Business Understanding**
 
-* **Menjawab Problem Statement:** Model yang dibuat berhasil menjawab problem statement dengan memprediksi apakah seseorang menderita anemia berdasarkan data medis dasar (seperti kadar hemoglobin, MCV, MCH, dan MCHC). Model yang dibangun menggunakan algoritma machine learning berhasil melakukan klasifikasi **Anemic** dan **Not Anemic** berdasarkan data yang ada, tanpa perlu menggunakan tes laboratorium yang mahal. Model berhasil memberikan solusi untuk masalah utama, yaitu diagnosis dini anemia yang lebih cepat, murah, dan lebih mudah diakses oleh masyarakat.
+* Model yang dibangun **berhasil memprediksi apakah seseorang menderita anemia menggunakan data medis dasar** seperti kadar hemoglobin, MCV, MCH, dan MCHC. Penggunaan algoritma machine learning seperti Random Forest, Decission Tree, Logistic Regression, dan K-Nearest Neighbors memungkinkan model untuk mengklasifikasikan status anemia (Anemic vs Not Anemic) tanpa memerlukan tes laboratorium yang mahal. Melalui eksplorasi data dan analisis fitur, model ini memberikan solusi yang lebih cepat, murah, dan lebih mudah diakses dalam mendeteksi anemia dibandingkan dengan metode tes laboratorium tradisional.
 
-* **Mencapai Goals:** Model Random Forest dengan hyperparameter yang dioptimalkan berhasil mencapai tujuan untuk memberikan prediksi yang akurat mengenai status anemia dan meningkatkan performa model melalui optimasi hyperparameter. Selain itu, perbandingan algoritma machine learning seperti Logistic Regression, Decision Trees, dan Random Forest dengan metrik evaluasi yang tepat (akurasi, precision, recall, F1-score) memungkinkan pemilihan model terbaik untuk mendeteksi anemia. Model yang dihasilkan sudah memenuhi tujuan untuk memberikan prediksi yang lebih baik dan lebih efisien. Hyperparameter tuning meningkatkan akurasi model, dan penggunaan berbagai algoritma memberikan perspektif yang lebih luas mengenai solusi yang optimal.
+* Dengan menggunakan metode Exploratory Data Analysis (EDA), ditemukan bahwa **Hemoglobin adalah fitur yang paling berpengaruh** dalam memprediksi status anemia. Korelasi yang sangat kuat antara kadar hemoglobin dan status anemia menunjukkan bahwa fitur ini adalah indikator utama dalam diagnosis anemia. Fitur-fitur lainnya seperti MCV dan MCHC juga berkontribusi, meskipun dengan pengaruh yang lebih rendah.
 
-* **Dampak dari Solution Statement:** Penggunaan beberapa algoritma dan hyperparameter tuning memberikan dampak positif yang signifikan dalam meningkatkan akurasi dan kinerja model. Hasil model yang dioptimalkan dapat digunakan untuk memilih model terbaik berdasarkan metrik evaluasi yang relevan, serta meminimalkan kesalahan prediksi, seperti false positives dan false negatives. Dampak dari solusi yang diberikan cukup besar, karena penggunaan teknik seperti **Grid Search** untuk hyperparameter tuning dan perbandingan model memberikan model yang lebih tepat dan efisien dalam mendeteksi anemia. Ini memberikan potensi besar untuk diterapkan dalam sistem kesehatan dengan biaya rendah dan kecepatan tinggi.
+* **Kinerja model berhasil ditingkatkan** melalui penerapan hyperparameter tuning menggunakan Grid Search. Proses ini memungkinkan pencarian kombinasi parameter terbaik untuk algoritma yang digunakan. Setelah tuning, model menunjukkan peningkatan dalam metrik evaluasi seperti accuracy, precision, recall, dan F1-score, yang membuatnya lebih akurat dalam mendeteksi status anemia.
 
 ## Kesimpulan
 Proyek ini berhasil mengembangkan model machine learning untuk mendeteksi anemia dengan menggunakan data medis dasar seperti kadar hemoglobin, MCV, MCH, dan MCHC. Dengan menggunakan algoritma seperti Random Forest, Logistic Regression, dan Decision Trees, serta penerapan hyperparameter tuning melalui Grid Search, model ini mampu memberikan prediksi yang akurat dan efisien. Hasil evaluasi menunjukkan bahwa Random Forest memberikan performa terbaik dalam mendeteksi anemia, dengan akurasi, precision, recall, dan F1-score yang tinggi. Model ini dapat diterapkan untuk diagnosis dini anemia dengan biaya rendah dan waktu yang lebih cepat, memberikan solusi yang efektif untuk masalah keterlambatan diagnosis.
@@ -420,3 +489,11 @@ Proyek ini berhasil mengembangkan model machine learning untuk mendeteksi anemia
 [[1] World Health Organization, "Anaemia in women and children," Global Health Observatory Data Repository, 2023. [Online]. Available: https://www.who.int/data/gho/data/themes/topics/anaemia_in_women_and_children. [Accessed: May 6, 2025].](https://www.who.int/data/gho/data/themes/topics/anaemia_in_women_and_children)
 
 [[2] K. L. Seerangan, A. R. K. Saravanan, and P. K. R. S. Anandan, "Machine learning for prediction of anemia using laboratory data," Journal of Medical Systems, vol. 42, no. 5, 2018.](https://www.researchgate.net/publication/368845592_PREDICTION_OF_ANEMIA_USING_MACHINE_LEARNING_ALGORITHMS)
+
+[[3]Scikit-learn documentation. "Random Forest," Scikit-learn, 2021. [Online]. Available: https://scikit-learn.org/stable/modules/ensemble.html#random-forest. [Accessed: 08-May-2025].](https://scikit-learn.org/stable/modules/ensemble.html#random-forest)
+
+[[4]Scikit-learn documentation. "Decision Trees," Scikit-learn, 2021. [Online]. Available: https://scikit-learn.org/stable/modules/tree.html. [Accessed: 08-May-2025].](https://scikit-learn.org/stable/modules/tree.html)
+
+[[5]Scikit-learn documentation. "LogisticRegression," Scikit-learn, 2021. [Online]. Available: https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html. [Accessed: 08-May-2025].](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)
+
+[[6]Scikit-learn documentation. "KNeighborsClassifier," Scikit-learn, 2021. [Online]. Available: https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html. [Accessed: 08-May-2025].](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html)
