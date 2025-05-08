@@ -66,6 +66,39 @@ Semua kolom bertipe data numerik dengan 4 fitur bertipe data float64(Hemoglobin,
 Berdasarkan pengecekan deskripsi statistik, kolom Gender dan Result memiliki distribusi yang cukup seimbang, sementara kolom numerik seperti Hemoglobin, MCH, MCHC, dan MCV menunjukkan variasi yang cukup besar. Variasi yang besar pada kolom Hemoglobin, MCH, MCHC, dan MCV adalah hal yang wajar, mengingat perbedaan kondisi antara individu yang menderita anemia dan yang tidak.
 
 ### Exploratory Data Analysis
+**Penanganan Missing Value**
+
+  Langkah pertama adalah memeriksa apakah ada data yang hilang (missing values) pada setiap fitur. Jika ada nilai yang hilang pada fitur penting, imputasi dilakukan menggunakan median atau mean (untuk fitur numerik). Jika jumlahnya sangat sedikit, baris yang memiliki missing values dapat dihapus tanpa mempengaruhi kualitas dataset. Penanganan missing values diperlukan karena data yang hilang dapat mengurangi kualitas model dan menyebabkan bias dalam prediksi. Dengan imputasi atau penghapusan missing values, dataset menjadi lebih konsisten dan memungkinkan model untuk belajar dengan lebih baik.
+    
+  Untuk pengecekan missing values, kode berikut digunakan:
+  ```python
+  # Memeriksa missing value
+  df.isnull().sum()
+  ```
+  ![Missing Value](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/cek_missing_value.png)
+
+  Namun, dalam dataset ini, saat dilakukan pengecekan tidak terdapat missing value sehingga tidak diperlukan penanganan missing value.
+**Penghapusan Data Duplikat**
+
+  Langkah selanjutnya adalah memeriksa apakah ada data duplikat di dalam dataset. Data duplikat dapat terjadi akibat kesalahan saat pengumpulan atau proses input data. Baris-baris yang memiliki nilai identik di seluruh fitur akan diperiksa dan dihapus jika ditemukan. Data duplikat harus dihapus karena dapat menyebabkan model memberikan bobot berlebih pada informasi yang sama, yang dapat mengarah pada overfitting atau kesalahan dalam pelatihan model. Penghapusan data duplikat memastikan bahwa model hanya belajar dari data yang unik dan relevan. 
+
+  Untuk pengecekan dan penghapusan data duplikat, kode berikut digunakan:
+  ```python
+  # Memeriksa duplikasi data
+  jumlah_duplikat = df.duplicated().sum()
+    print(f"Jumlah baris duplikat: {jumlah_duplikat}")
+
+  # Menghapus baris duplikat
+  df = df.drop_duplicates()
+  ```
+  Pada dataset ini, ditemukan 887 baris duplikat yang kemudian dihapus. Sisa data setelah pembersihan baris duplikat adalah 534. Data yang terduplikasi memang cukup banyak, tetapi sisa data yang bersih sebanyak 534 (di atas 500) masih bisa untuk digunakan.
+**Penanganan Outlier**
+
+  Untuk mendeteksi outlier atau nilai ekstrem, teknik boxplot dan IQR digunakan untuk mengidentifikasi data yang berada di luar batas normal distribusi. Penananganan outlier diperlukan karena outlier yang tidak sesuai dengan pola data dapat mengganggu model, menghasilkan prediksi yang tidak akurat, dan menyebabkan overfitting. 
+
+  ![Outlier](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/outlier.png)
+
+  Pada dataset ini tidak ditemukan outlier.
 **Univariate Analysis**
 - **Analisis Distribusi Data Kategorikal**
   
@@ -99,47 +132,11 @@ Berdasarkan pengecekan deskripsi statistik, kolom Gender dan Result memiliki dis
   Hemoglobin adalah fitur yang paling kuat terkait dengan status anemia, sedangkan MCH, MCV, dan MCHC menunjukkan hubungan yang lebih lemah dengan status anemia. Oleh karena itu, dalam pemodelan, Hemoglobin akan menjadi fitur yang sangat penting. 
 
 ## Data Preparation
-Data Preparation mencakup data cleaning dan data preprocessing yang penting untuk meningkatkan kualitas data dan memastikan model bekerja dengan efektif.
-### Data Cleaning
-- **Penanganan Missing Value**
-
-  Langkah pertama adalah memeriksa apakah ada data yang hilang (missing values) pada setiap fitur. Jika ada nilai yang hilang pada fitur penting, imputasi dilakukan menggunakan median atau mean (untuk fitur numerik). Jika jumlahnya sangat sedikit, baris yang memiliki missing values dapat dihapus tanpa mempengaruhi kualitas dataset. Penanganan missing values diperlukan karena data yang hilang dapat mengurangi kualitas model dan menyebabkan bias dalam prediksi. Dengan imputasi atau penghapusan missing values, dataset menjadi lebih konsisten dan memungkinkan model untuk belajar dengan lebih baik.
-    
-  Untuk pengecekan missing values, kode berikut digunakan:
-  ```python
-  # Memeriksa missing value
-  df.isnull().sum()
-  ```
-  ![Missing Value](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/cek_missing_value.png)
-
-  Namun, dalam dataset ini, saat dilakukan pengecekan tidak terdapat missing value sehingga tidak diperlukan penanganan missing value.
-- **Penghapusan Data Duplikat**
-
-  Langkah selanjutnya adalah memeriksa apakah ada data duplikat di dalam dataset. Data duplikat dapat terjadi akibat kesalahan saat pengumpulan atau proses input data. Baris-baris yang memiliki nilai identik di seluruh fitur akan diperiksa dan dihapus jika ditemukan. Data duplikat harus dihapus karena dapat menyebabkan model memberikan bobot berlebih pada informasi yang sama, yang dapat mengarah pada overfitting atau kesalahan dalam pelatihan model. Penghapusan data duplikat memastikan bahwa model hanya belajar dari data yang unik dan relevan. 
-
-  Untuk pengecekan dan penghapusan data duplikat, kode berikut digunakan:
-  ```python
-  # Memeriksa duplikasi data
-  jumlah_duplikat = df.duplicated().sum()
-    print(f"Jumlah baris duplikat: {jumlah_duplikat}")
-
-  # Menghapus baris duplikat
-  df = df.drop_duplicates()
-  ```
-  Pada dataset ini, ditemukan 887 baris duplikat yang kemudian dihapus. Sisa data setelah pembersihan baris duplikat adalah 534. Data yang terduplikasi memang cukup banyak, tetapi sisa data yang bersih sebanyak 534 (di atas 500) masih bisa untuk digunakan.
-- **Penanganan Outlier**
-
-  Untuk mendeteksi outlier atau nilai ekstrem, teknik boxplot dan IQR digunakan untuk mengidentifikasi data yang berada di luar batas normal distribusi. Penananganan outlier diperlukan karena outlier yang tidak sesuai dengan pola data dapat mengganggu model, menghasilkan prediksi yang tidak akurat, dan menyebabkan overfitting. 
-
-  ![Outlier](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/outlier.png)
-
-  Pada dataset ini tidak ditemukan outlier.
-
-### Data Preprocessing
 Fitur pada Dataset Anemia sudah berbentuk numerik semua sehingga tidak perlu dilakukan Encoding. Preprocessing yang dilakukan adalah sebagai berikut:
 - **Data Splitting**
 
-  Dataset akan dibagi menjadi dua bagian, yaitu data training dan testing (proporsi 80:20). Data training akan digunakan untuk melatih model, sedangkan data testing akan digunakan untuk mengevaluasi kinerja model yang sudah dibangun. Pemisahan data ini penting untuk menghindari overfitting dan memastikan model dapat diuji pada data yang tidak digunakan selama proses pelatihan. Berikut adalah jumlah data setelah dilakukan splitting.
+  Dataset akan dibagi menjadi dua bagian, yaitu data training dan testing (proporsi 80:20). Data training akan digunakan untuk melatih model, sedangkan data testing akan digunakan untuk mengevaluasi kinerja model yang sudah dibangun. Pemisahan data ini penting untuk menghindari overfitting dan memastikan model dapat diuji pada data yang tidak digunakan selama proses pelatihan. Kita harus membagi data agar proses transformasi hanya dilakukan pada data latih saja. Data uji harus berperan sebagai data baru yang tidak terpengaruh oleh proses pelatihan, untuk menilai bagaimana model bekerja pada data yang belum pernah dilihat sebelumnya.
+  Berikut adalah jumlah data setelah dilakukan splitting.
 
   | Data              | Jumlah |
   |-------------------|--------|
@@ -153,13 +150,22 @@ Fitur pada Dataset Anemia sudah berbentuk numerik semua sehingga tidak perlu dil
   ![Imbalance Class](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/imbalance_class.png)
 - **Feature Scaling**
     
-  Proses scaling bertujuan untuk menyamakan rentang nilai pada setiap fitur dalam dataset, sehingga semua fitur berada pada skala yang serupa. Jika model machine learning tidak melakukan scaling, fitur dengan nilai yang lebih besar cenderung mendominasi hasil prediksi, sementara fitur dengan nilai yang lebih kecil memiliki dampak yang lebih rendah terhadap prediksi. Dalam proyek ini, fitur akan di-scale menggunakan metode standarisasi karena distribusi data cenderung mendekati normal, sehingga metode ini lebih sesuai digunakan. Standarisasi dilakukan dengan memanfaatkan fungsi StandardScaler() dari library sklearn, yang bekerja dengan mengurangi setiap nilai pada fitur dengan rata-rata fitur (mean), kemudian membagi hasilnya dengan standar deviasi. Hal ini memastikan bahwa semua fitur terpusat di sekitar nol dan memiliki variansi yang seragam. Berikut adalah hasil standarisasi data.
+  Proses scaling bertujuan untuk menyamakan rentang nilai pada setiap fitur dalam dataset, sehingga semua fitur berada pada skala yang serupa. Jika model machine learning tidak melakukan scaling, fitur dengan nilai yang lebih besar cenderung mendominasi hasil prediksi, sementara fitur dengan nilai yang lebih kecil memiliki dampak yang lebih rendah terhadap prediksi. Dalam proyek ini, fitur akan di-scale menggunakan metode standarisasi karena distribusi data cenderung mendekati normal, sehingga metode ini lebih sesuai digunakan. Standarisasi dilakukan dengan memanfaatkan fungsi StandardScaler() dari library sklearn, yang bekerja dengan mengurangi setiap nilai pada fitur dengan rata-rata fitur (mean), kemudian membagi hasilnya dengan standar deviasi. Hal ini memastikan bahwa semua fitur terpusat di sekitar nol dan memiliki variansi yang seragam.
+  Untuk menghindari kebocoran informasi pada data uji, kita hanya akan menerapkan fitur standarisasi pada data latih. Berikut adalah hasil standarisasi data. 
   
   ![Standarisasi Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/standarisasi.png)
 
 ## Modeling
 
-Pada tahap ini, beberapa algoritma machine learning digunakan untuk memecahkan masalah klasifikasi anemia, yaitu **Random Forest (RF)**, **Decision Trees (DT)**, **Logistic Regression (LR)**, dan **K-Nearest Neighbors (KNN)**.
+Pada tahap ini, beberapa algoritma machine learning digunakan untuk memecahkan masalah klasifikasi anemia, yaitu **Random Forest (RF)**, **Decision Trees (DT)**, **Logistic Regression (LR)**, dan **K-Nearest Neighbors (KNN)**. 
+
+Pada awalnya, model-model dasar seperti **RandomForestClassifier, DecisionTreeClassifier, LogisticRegression, dan KNeighborsClassifier** dilatih menggunakan **parameter default** dari masing-masing model. Pelatihan ini dilakukan pada **data training yang telah diskalakan dan di-resample** (X_train_scaled dan y_train_resampled), tanpa melakukan perubahan apapun pada parameter model. Ini bertujuan untuk mendapatkan baseline performance atau kinerja dasar model tanpa optimasi parameter.
+
+Setelah model-model tersebut dilatih, tahap berikutnya adalah melakukan **hyperparameter tuning** untuk menemukan kombinasi parameter terbaik yang dapat meningkatkan kinerja model. Hyperparameter tuning dilakukan menggunakan metode GridSearchCV, yang akan mengeksplorasi berbagai kombinasi nilai parameter untuk setiap model dan memilih yang terbaik.
+
+Setelah parameter terbaik ditemukan, model akan dibangun kembali dengan kombinasi parameter terbaik dan diuji untuk melihat apakah ada peningkatan performa dibandingkan dengan model yang dilatih dengan parameter default.
+
+Berikut adalah penjelasan dari model yang akan digunakan:
 
 ### 1. **Random Forest (RF)**
 ![RF Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/random_forest.jpg)
@@ -168,9 +174,7 @@ Pada tahap ini, beberapa algoritma machine learning digunakan untuk memecahkan m
 
 **Tahapan:**
 
-- Pembagian data secara acak menjadi beberapa subset.
-- Membangun beberapa pohon keputusan pada subset data yang berbeda.
-- Menggunakan mayoritas suara untuk menghasilkan prediksi akhir.
+**Random Forest (RF)** adalah algoritma ensemble yang menggunakan teknik pembelajaran berbasis pohon keputusan. Proses ini dimulai dengan **pembagian data secara acak** menjadi beberapa subset yang berbeda. Setiap subset data kemudian digunakan untuk membangun **beberapa pohon keputusan** secara terpisah. Setiap pohon keputusan ini dilatih pada data yang berbeda, dengan beberapa fitur yang dipilih secara acak pada setiap percabangan untuk meningkatkan keragaman antar pohon. Setelah semua pohon selesai dilatih, algoritma **menggunakan mayoritas suara** (voting) dari seluruh pohon untuk menghasilkan prediksi akhir. Dengan cara ini, Random Forest mengurangi risiko overfitting yang sering terjadi pada pohon keputusan tunggal dan meningkatkan akurasi model dengan menggabungkan prediksi dari banyak pohon keputusan yang berbeda [[3]](https://scikit-learn.org/stable/modules/ensemble.html#random-forest).
 
 **Parameter yang Digunakan:**
 
@@ -197,8 +201,7 @@ Pada tahap ini, beberapa algoritma machine learning digunakan untuk memecahkan m
 
 **Tahapan:**
 
-- Memilih fitur yang membagi dataset terbaik.
-- Membangun pohon keputusan berdasarkan pembagian terbaik hingga batas kedalaman pohon tercapai.
+**Decision Tree** adalah algoritma pembelajaran yang membangun model berbentuk pohon keputusan untuk memprediksi hasil berdasarkan fitur-fitur input. Proses dimulai dengan **memilih fitur yang membagi dataset terbaik**, yaitu fitur yang dapat memisahkan data secara optimal berdasarkan kriteria tertentu, seperti **Gini Impurity** atau **Entropy**. Pembagian ini dilakukan berulang kali pada setiap node, sehingga dataset terpecah menjadi subset yang lebih homogen. Setelah memilih fitur terbaik untuk membagi data, pohon keputusan **dibangun secara rekursif**, membagi dataset lebih lanjut pada setiap cabang pohon hingga **batas kedalaman pohon tercapai** atau hingga tidak ada pembagian yang lebih baik yang dapat dilakukan. Proses ini berlanjut hingga model mencapai titik di mana pembagian lebih lanjut tidak memberikan manfaat atau mencapai kriteria penghentian lainnya, seperti jumlah minimum sampel di setiap node atau kedalaman maksimum pohon yang diinginkan [[4]](https://scikit-learn.org/stable/modules/tree.html).
 
 **Parameter yang Digunakan:**
 
@@ -225,8 +228,7 @@ Pada tahap ini, beberapa algoritma machine learning digunakan untuk memecahkan m
 
 **Tahapan:**
 
-- Menghitung kombinasi linier dari fitur-fitur.
-- Menerapkan fungsi logistik untuk menghasilkan probabilitas antara 0 dan 1, kemudian mengklasifikasikan data berdasarkan threshold yang ditentukan.
+**Logistic Regression (LR)** adalah metode untuk memprediksi kategori atau kelas suatu data berdasarkan informasi yang diberikan. Proses pertama adalah **menghitung kombinasi linier dari fitur-fitur**, yang artinya mengalikan setiap fitur dengan bobot (angka) yang ditentukan dan menjumlahkannya. Ini menghasilkan nilai yang bisa sangat besar atau kecil. Setelah itu, **fungsi logistik (atau sigmoid)** digunakan untuk mengubah nilai tersebut menjadi angka yang berada antara 0 dan 1, yang merepresentasikan probabilitas. Misalnya, nilai 0.8 berarti ada 80% kemungkinan data tersebut termasuk dalam kelas positif. Terakhir, model akan **mengklasifikasikan data** berdasarkan angka probabilitas ini. Jika probabilitas lebih besar dari angka ambang batas (misalnya 0,5), data akan dikategorikan sebagai kelas positif, dan jika lebih kecil, sebagai kelas negatif [[5]](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html).
 
 **Parameter yang Digunakan:**
 
@@ -252,9 +254,9 @@ Pada tahap ini, beberapa algoritma machine learning digunakan untuk memecahkan m
 
 **Tahapan:**
 
-- Menghitung jarak antara titik data yang ingin diprediksi dengan semua titik data dalam training set.
-- Mengklasifikasikan data berdasarkan mayoritas kelas dari **k** tetangga terdekat.
-- 
+**K-Nearest Neighbors (KNN)** adalah metode klasifikasi yang digunakan untuk memprediksi kelas suatu data berdasarkan kedekatannya dengan data lain dalam dataset. Proses dimulai dengan **menghitung jarak** antara titik data yang ingin diprediksi dan semua titik data yang ada di training set, biasanya menggunakan **Euclidean Distance**, yang mengukur seberapa jauh dua titik data satu sama lain. Setelah jarak dihitung, data akan **dikelompokkan berdasarkan mayoritas kelas dari k tetangga terdekat**. Dengan kata lain, kita memilih **k** titik data yang paling dekat dengan titik yang ingin diprediksi, dan kelas yang paling banyak muncul di antara k tetangga tersebut akan menjadi prediksi untuk data yang sedang diuji. Metode ini bergantung pada kedekatan data untuk melakukan klasifikasi, sehingga semakin kecil nilai **k**, semakin sensitif model terhadap perubahan lokal dalam data [[6]](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html).
+
+  
 **Parameter yang Digunakan:**
 
 - `n_neighbors`: Jumlah tetangga terdekat yang digunakan untuk klasifikasi.
@@ -322,7 +324,7 @@ Pada tahap ini, metrik evaluasi yang digunakan untuk mengukur performa model mel
   Precision mengukur seberapa banyak prediksi positif yang benar (yaitu, individu yang diprediksi menderita anemia dan benar-benar menderita anemia) dibandingkan dengan seluruh prediksi positif yang dibuat oleh model. Formula precision adalah:
 
   $$
-  \text{Precision} = \frac{\text{True Positives} + \text{False Positives}}{\text{True Positives}}
+  \text{Precision} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Positives}}
   $$
 
   Precision tinggi menunjukkan bahwa model sangat berhati-hati dalam mengklasifikasikan individu sebagai menderita anemia dan memiliki lebih sedikit kesalahan klasifikasi (false positives).
@@ -334,7 +336,7 @@ Pada tahap ini, metrik evaluasi yang digunakan untuk mengukur performa model mel
   Recall mengukur kemampuan model dalam menemukan semua kasus positif yang sebenarnya (yaitu, mendeteksi semua individu yang benar-benar menderita anemia). Formula recall adalah:
 
   $$
-  \text{Recall} = \frac{\text{True Positives} + \text{False Negatives}}{\text{True Positives}}
+  \text{Recall} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Negatives}}
   $$
 
   Recall tinggi menunjukkan bahwa model berhasil menangkap sebagian besar individu yang benar-benar menderita anemia, meskipun mungkin ada beberapa kesalahan (false negatives).
@@ -354,8 +356,11 @@ Pada tahap ini, metrik evaluasi yang digunakan untuk mengukur performa model mel
   F1-Score yang baik menunjukkan bahwa model tidak hanya akurat dalam memprediksi anemia tetapi juga berhasil mendeteksi sebagian besar individu yang benar-benar menderita anemia, yang sangat penting dalam konteks kesehatan.
 
 ### Hasil Proyek Berdasarkan Metrik Evaluasi
+Setelah melakukan pelatihan dan evaluasi model menggunakan **cross-validation**, hasil yang didapatkan menunjukkan performa model yang beragam tergantung pada algoritma yang digunakan. Terlihat bahwa performa model setelah dilakukan hyperparameter tuning memberikan hasil yang sedikit lebih baik dari sebelum melakukan hyperparameter tuning. 
 
-Setelah melakukan pelatihan dan evaluasi model menggunakan **cross-validation**, hasil yang didapatkan menunjukkan performa model yang beragam tergantung pada algoritma yang digunakan. Berikut adalah ringkasan metrik evaluasi untuk model yang diuji setelah dilakukan hyperparameter tuning:
+
+
+Berikut adalah ringkasan metrik evaluasi untuk model yang diuji setelah dilakukan hyperparameter tuning:
 
   ![Evaluasi Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/evaluasi.png)
 
