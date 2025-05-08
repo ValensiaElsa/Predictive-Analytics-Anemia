@@ -66,22 +66,27 @@ Semua kolom bertipe data numerik dengan 4 fitur bertipe data float64(Hemoglobin,
 Berdasarkan pengecekan deskripsi statistik, kolom Gender dan Result memiliki distribusi yang cukup seimbang, sementara kolom numerik seperti Hemoglobin, MCH, MCHC, dan MCV menunjukkan variasi yang cukup besar. Variasi yang besar pada kolom Hemoglobin, MCH, MCHC, dan MCV adalah hal yang wajar, mengingat perbedaan kondisi antara individu yang menderita anemia dan yang tidak.
 
 ### Exploratory Data Analysis
+**Univariate Analysis**
 - **Analisis Distribusi Data Kategorikal**
   
   ![Analisis Distribusi Kategorikal Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/analisis_distribusi_kategorikal.png)
 
   Berdasarkan visualisasi data di atas, jumlah individu yang tidak menderita anemia lebih banyak dibandingkan dengan yang menderita anemia, dengan kategori Not Anemic yang jauh lebih dominan. Meskipun distribusi data relatif seimbang, ketidakseimbangan kelas antara Anemic dan Not Anemic tetap perlu diperhatikan. Oleh karena itu, model yang akan dibangun harus mempertimbangkan masalah ketidakseimbangan kelas ini, agar performa model tetap optimal dan tidak bias terhadap kelas mayoritas.
-- **Analisis Distribusi Data Numerik menggunakan Histogram**
+- **Analisis Distribusi Data Numerik**
   
   ![Analisis Distribusi Histogram](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/analisis_distribusi_histogram.png)
 
-  Berdasarkan analisis distribusi histogram, distribusi Hemoglobin cenderung terdistribusi dengan kemiringan ke kanan (skewed), dengan sebagian besar individu memiliki nilai normal antara 12 hingga 16 g/dL, namun ada juga beberapa individu dengan kadar yang sangat rendah, yang menunjukkan potensi anemia. Sementara MCH, MCHC, dan MCV memiliki variasi yang lebih terdistribusi merata
-- **Analisis Distribusi Fitur menggunakan BoxPlot**
+  Berdasarkan analisis distribusi histogram, distribusi Hemoglobin cenderung terdistribusi dengan kemiringan ke kiri (skewed), dengan sebagian besar individu memiliki nilai normal antara 12 hingga 16 g/dL, namun ada juga beberapa individu dengan kadar yang sangat rendah, yang menunjukkan potensi anemia. Sementara MCH, MCHC, dan MCV memiliki variasi yang lebih terdistribusi merata. MCH memiliki distribusi yang lebih merata dengan puncak di kisaran 22-26, sementara MCHC lebih terkonsentrasi pada nilai antara 28-32. MCV menunjukkan variasi yang lebih luas, terutama di kisaran 70 hingga 100. 
+
+**Bivariate Analysis**
   
   ![Analisis Distribusi BoxPlot](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/analisis_distribusi_fitur.png)
 
   Pada boxplot berikut, distribusi MCH antara individu yang menderita anemia dan yang tidak menderita anemia terlihat cukup serupa. Meskipun ada sedikit perbedaan, variabilitas MCH pada kedua kelompok ini hampir sama. Terlihat juga bahwa individu yang tidak menderita anemia memiliki nilai MCV yang sedikit lebih tinggi dibandingkan mereka yang menderita anemia. Distribusi MCHC antara individu dengan dan tanpa anemia cukup mirip, namun ada sedikit perbedaan. Fitur-fitur seperti MCH, MCV, dan MCHC menunjukkan sedikit perbedaan antara kelompok Anemic dan Not Anemic. Ini menunjukkan bahwa meskipun fitur ini penting, perbedaan yang lebih besar mungkin ada di fitur lainnya seperti Hemoglobin. Dapat dilihat bahwa individu yang terkena anemia memiliki kadar hemoglobin lebih rendah dibandingkan dengan individu yang tidak terkena anemia. 
 
+**Multivarate Analysis**
+- **Analisis Distribusi**
+  
   ![Analisis Distribusi BoxPlot](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/analisis_distribusi_gender_result_hemoglobin.png)
 
   Pada eksplorasi lebih lanjut distribusi data berdasarkan gender dan status anemia, terlihat bahwa perempuan yang menderita anemia (ditandai dengan kotak merah) memiliki kadar Hemoglobin yang lebih rendah dibandingkan dengan laki-laki yang menderita anemia. Selain itu, perempuan yang tidak menderita anemia (kotak biru) menunjukkan kadar Hemoglobin yang lebih tinggi secara keseluruhan dibandingkan laki-laki. Secara umum, individu dengan anemia (baik perempuan maupun laki-laki) memiliki kadar Hemoglobin yang jauh lebih rendah dibandingkan dengan mereka yang tidak menderita anemia. Ini menunjukkan bahwa kadar Hemoglobin adalah indikator penting dalam mendeteksi anemia, dan ada perbedaan antara jenis kelamin dalam hal tingkat hemoglobin yang lebih rendah pada perempuan, yang umum terjadi pada anemia.
@@ -89,7 +94,9 @@ Berdasarkan pengecekan deskripsi statistik, kolom Gender dan Result memiliki dis
   
   ![Analisis Korelasi](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/analisis_korelasi.png)
 
-   Matriks korelasi menunjukkan bahwa Gender memiliki korelasi positif sedang dengan Result (Anemia), dengan nilai korelasi sekitar 0.23. Ini berarti ada sedikit kecenderungan bahwa perempuan lebih mungkin menderita anemia, yang konsisten dengan pengetahuan medis bahwa anemia lebih umum terjadi pada wanita. Korelasi negatif yang sangat kuat antara Hemoglobin dan Result (-0.79) menunjukkan bahwa Hemoglobin yang lebih rendah sangat berhubungan dengan individu yang menderita anemia. Hal ini memperkuat pemahaman bahwa hemoglobin adalah indikator utama dalam diagnosis anemia. Korelasi antara MCH, MCHC, dan Result sangat lemah, menunjukkan bahwa meskipun fitur-fitur ini berguna, mereka tidak sekuat Hemoglobin dalam memprediksi status anemia. Hemoglobin adalah fitur yang paling kuat terkait dengan status anemia, sedangkan MCH, MCV, dan MCHC menunjukkan hubungan yang lebih lemah dengan status anemia. Oleh karena itu, dalam pemodelan, Hemoglobin akan menjadi fitur yang sangat penting.
+   Matriks korelasi menunjukkan bahwa Gender memiliki korelasi positif sedang dengan Result (Anemia), dengan nilai korelasi sekitar 0.23. Ini berarti ada sedikit kecenderungan bahwa perempuan lebih mungkin menderita anemia, yang konsisten dengan pengetahuan medis bahwa anemia lebih umum terjadi pada wanita. Korelasi negatif yang sangat kuat antara Hemoglobin dan Result (-0.79) menunjukkan bahwa Hemoglobin yang lebih rendah sangat berhubungan dengan individu yang menderita anemia. Hal ini memperkuat pemahaman bahwa hemoglobin adalah indikator utama dalam diagnosis anemia. Korelasi antara MCH, MCHC, dan Result sangat lemah, menunjukkan bahwa meskipun fitur-fitur ini berguna, mereka tidak sekuat Hemoglobin dalam memprediksi status anemia. Meskipun begitu, tidak ada fitur yang di-drop mengingat jumlah data yang terbatas. Dalam kasus data yang terbatas, menghapus fitur meskipun dengan korelasi rendah dapat mengurangi informasi yang tersedia untuk model. Oleh karena itu, fitur-fitur ini tetap dipertahankan untuk memastikan bahwa model memiliki cukup informasi untuk meningkatkan prediksi, meskipun kontribusinya mungkin kecil.
+
+  Hemoglobin adalah fitur yang paling kuat terkait dengan status anemia, sedangkan MCH, MCV, dan MCHC menunjukkan hubungan yang lebih lemah dengan status anemia. Oleh karena itu, dalam pemodelan, Hemoglobin akan menjadi fitur yang sangat penting. 
 
 ## Data Preparation
 Data Preparation mencakup data cleaning dan data preprocessing yang penting untuk meningkatkan kualitas data dan memastikan model bekerja dengan efektif.
