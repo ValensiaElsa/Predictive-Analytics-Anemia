@@ -405,12 +405,12 @@ Berikut adalah ringkasan metrik evaluasi untuk model yang diuji **sebelum dilaku
 
 - **Decision Tree (DT)**:
 
-  * **Akurasi**: 97.20%
-  * **Precision**: 97.36%
-  * **Recall**: 97.20%
-  * **F1-Score**: 97.20%
+  * **Akurasi**: 96.26%
+  * **Precision**: 96.54%
+  * **Recall**: 96.26%
+  * **F1-Score**: 96.27%
 
-    Menunjukkan bahwa model ini masih memberikan performa yang sangat baik, meskipun sedikit lebih rendah dibandingkan dengan Random Forest. Precision yang tinggi menunjukkan bahwa sebagian besar prediksi positifnya benar, namun Recall yang sedikit lebih rendah menunjukkan bahwa model ini sedikit lebih sering melewatkan individu dengan anemia
+  Menunjukkan bahwa model ini masih memberikan performa yang sangat baik, meskipun sedikit lebih rendah dibandingkan dengan Random Forest. Precision yang tinggi menunjukkan bahwa sebagian besar prediksi positifnya benar, namun Recall yang sedikit lebih rendah menunjukkan bahwa model ini sedikit lebih sering melewatkan individu dengan anemia
 
 - **Logistic Regression (LR)**:
 
@@ -419,7 +419,7 @@ Berikut adalah ringkasan metrik evaluasi untuk model yang diuji **sebelum dilaku
   * **Recall**: 96.26%
   * **F1-Score**: 96.27%
   
-  Meskipun tidak sebaik Random Forest atau Decision Tree, model ini tetap mampu mengklasifikasikan data dengan baik, terutama dalam hal Precision dan Recall yang seimbang. Namun, Recall yang lebih rendah menunjukkan bahwa model ini lebih sering melewatkan individu yang menderita anemia dibandingkan dengan model lainnya
+  Meskipun tidak sebaik Random Forest, model ini tetap mampu mengklasifikasikan data dengan baik, terutama dalam hal Precision dan Recall yang seimbang. Namun, Recall yang lebih rendah menunjukkan bahwa model ini lebih sering melewatkan individu yang menderita anemia dibandingkan dengan model lainnya
   
 - **K-Nearest Neighbors (KNN)**:
 
@@ -430,7 +430,7 @@ Berikut adalah ringkasan metrik evaluasi untuk model yang diuji **sebelum dilaku
     
    Meskipun memiliki Precision dan Recall yang seimbang, KNN lebih sering melewatkan individu yang menderita anemia dan memiliki Accuracy yang jauh lebih rendah dibandingkan model lainnya.
 
-Secara keseluruhan, **Random Forest** menjadi model yang paling unggul dalam hal akurasi, recall, dan keseimbangan metrik evaluasi, diikuti oleh **Decision Tree**, **Logistic Regression**, dan **K-Nearest Neighbors**. Model ini memberikan wawasan mengenai fitur yang paling relevan dan memberikan hasil yang optimal pada dataset yang diuji.
+Secara keseluruhan, **Random Forest** menjadi model yang paling unggul dalam hal akurasi, recall, dan keseimbangan metrik evaluasi, diikuti oleh **Decision Tree**, **Logistic Regression**, dan **K-Nearest Neighbors**. Model ini memberikan hasil yang optimal pada dataset yang diuji.
 
 Berikut adalah ringkasan metrik evaluasi untuk model yang diuji **setelah dilakukan hyperparameter tuning**:
 
@@ -457,7 +457,7 @@ Berikut adalah ringkasan metrik evaluasi untuk model yang diuji **setelah dilaku
 - **Logistic Regression (LR)**:
 
   * **Akurasi**: 97.20%
-  * **Precision**: 97.35%
+  * **Precision**: 97.36%
   * **Recall**: 97.20%
   * **F1-Score**: 97.20%
   
