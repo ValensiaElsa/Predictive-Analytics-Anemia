@@ -105,7 +105,7 @@ Berdasarkan pengecekan deskripsi statistik, kolom Gender dan Result memiliki dis
   
   ![Analisis Distribusi Kategorikal Image](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/analisis_distribusi_kategorikal.png)
 
-  Berdasarkan visualisasi data di atas, jumlah individu yang tidak menderita anemia lebih banyak dibandingkan dengan yang menderita anemia, dengan kategori Not Anemic yang jauh lebih dominan. Meskipun distribusi data relatif seimbang, ketidakseimbangan kelas antara Anemic dan Not Anemic tetap perlu diperhatikan. Oleh karena itu, model yang akan dibangun harus mempertimbangkan masalah ketidakseimbangan kelas ini, agar performa model tetap optimal dan tidak bias terhadap kelas mayoritas.
+  Berdasarkan visualisasi data di atas, dapat dilihat bahwa terdapat lebih banyak individu berjenis kelamin Female daripada Male, dengan jumlah Female yang jauh lebih dominan. Sedangkan, distribusi Result menunjukkan jumlah individu yang tidak menderita anemia lebih banyak dibandingkan dengan yang menderita anemia, dengan kategori Not Anemic yang jauh lebih dominan. Meskipun distribusi data relatif seimbang, ketidakseimbangan kelas antara Anemic dan Not Anemic tetap perlu diperhatikan. Oleh karena itu, model yang akan dibangun harus mempertimbangkan masalah ketidakseimbangan kelas ini, agar performa model tetap optimal dan tidak bias terhadap kelas mayoritas.
 - **Analisis Distribusi Data Numerik**
   
   ![Analisis Distribusi Histogram](https://raw.githubusercontent.com/ValensiaElsa/Predictive-Analytics-Anemia/main/image/analisis_distribusi_histogram.png)
