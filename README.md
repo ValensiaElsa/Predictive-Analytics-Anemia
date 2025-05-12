@@ -22,13 +22,13 @@ Berdasarkan uraian yang telah dipaparkan pada latar belakang diatas, maka dapat 
 Berdasarkan rumusan masalah yang telah dipaparkan di atas, maka proyek penelitian ini memiliki tujuan, yaitu:
 - Membangun model prediksi berbasis machine learning yang dapat memberikan diagnosis dini anemia dengan data medis dasar, seperti jumlah sel darah merah, kadar hemoglobin, MCV, MCH, dan MCHC.
 - Mengetahui fitur yang paling berpengaruh untuk mendeteksi anemia.
-- Mengukur dan meningkatkan kinerja model prediktif dengan menggunakan berbagai algoritma machine learning serta melakukan hyperparameter tuning untuk memperoleh hasil yang lebih optimal.
+- Mengukur dan meningkatkan kinerja model prediktif dengan menggunakan metrik evaluasi serta melakukan hyperparameter tuning untuk memperoleh hasil yang lebih optimal.
 
 ### Solution statements
 Berdasarkan tujuan yang telah dipaparkan diatas, maka proyek penelitian ini memiliki solusi atau tahapan sebagai berikut:
 - Menggunakan beberapa algoritma machine learning, seperti Logistic Regression, Decision Trees, Random Forest, dan K-Nearest Neighbors untuk membangun model klasifikasi anemia yang dapat memprediksi status anemia berdasarkan data medis yang ada dan akan dipilih satu model dengan kinerja model terbaik.
 - Melakukan eksplorasi data awal (Exploratory Data Analysis, EDA) untuk menganalisis korelasi antar fitur, mengidentifikasi hubungan antara variabel medis dengan status anemia, dan menentukan fitur yang memiliki kontribusi signifikan dalam mendeteksi anemia.
-- Menerapkan hyperparameter tuning dengan menggunakan teknik Grid Search untuk memilih kombinasi parameter terbaik pada masing-masing algoritma dan meningkatkan kinerja model. Kinerja model akan diukur dengan menggunakan metrik evaluasi seperti akurasi, precision, recall, dan F1-score, yang akan membantu dalam memilih model terbaik berdasarkan hasil prediksi yang paling optimal
+- Menerapkan hyperparameter tuning dengan menggunakan teknik Grid Search untuk memilih kombinasi parameter terbaik pada masing-masing algoritma dan meningkatkan kinerja model. Kinerja model akan diukur dengan menggunakan metrik evaluasi seperti akurasi, precision, recall, dan F1-score, yang akan membantu dalam memilih model terbaik berdasarkan hasil prediksi yang paling optimal.
 
 ## Data Understanding
 
