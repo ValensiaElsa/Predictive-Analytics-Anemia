@@ -91,7 +91,7 @@ Berdasarkan pengecekan deskripsi statistik, kolom Gender dan Result memiliki dis
   ```
   Pada dataset ini, ditemukan 887 baris duplikat.
   
-### Penanganan Outlier
+### Pengecekan Outlier
 
   Untuk mendeteksi outlier atau nilai ekstrem, teknik boxplot dan IQR digunakan untuk mengidentifikasi data yang berada di luar batas normal distribusi. Penananganan outlier diperlukan karena outlier yang tidak sesuai dengan pola data dapat mengganggu model, menghasilkan prediksi yang tidak akurat, dan menyebabkan overfitting. 
 
