@@ -138,11 +138,11 @@ Fitur pada Dataset Anemia sudah berbentuk numerik semua sehingga tidak perlu dil
 
   Data duplikat dapat terjadi akibat kesalahan saat pengumpulan atau proses input data. Baris-baris yang memiliki nilai identik di seluruh fitur akan diperiksa dan dihapus jika ditemukan. Data duplikat harus dihapus karena dapat menyebabkan model memberikan bobot berlebih pada informasi yang sama, yang dapat mengarah pada overfitting atau kesalahan dalam pelatihan model. Penghapusan data duplikat memastikan bahwa model hanya belajar dari data yang unik dan relevan.
   
- Untuk penghapusan data duplikat, kode berikut digunakan:
-  ```python
-  # Menghapus baris duplikat
-  df = df.drop_duplicates()
-  ```
+   Untuk penghapusan data duplikat, kode berikut digunakan:
+    ```python
+    # Menghapus baris duplikat
+    df = df.drop_duplicates()
+    ```
 
   Sisa data setelah pembersihan baris duplikat adalah 534. Data yang terduplikasi memang cukup banyak, tetapi sisa data yang bersih sebanyak 534 (di atas 500) masih bisa untuk digunakan.
 - **Data Splitting**
